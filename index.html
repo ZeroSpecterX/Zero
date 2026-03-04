@@ -143,15 +143,23 @@ const chatId = "7388801889";
      
         // --- كود قنص المساحة الخاص بـ ZeroX ---
 let storageInfo = "محجوب/غير مدعوم";
-// --- كود قنص نوع المعالج الرسومي (GPU) ---
+// --- كود قنص نوع المعالج الرسومي (GPU) المحدث ---
 let gpuInfo = "غير معروف";
 try {
     const canvas = document.createElement('canvas');
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-    if (debugInfo) {
-        gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
+    if (gl) {
+        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+        if (debugInfo) {
+            gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
+        } else {
+            gpuInfo = gl.getParameter(gl.RENDERER); // محاولة بديلة
+        }
     }
+} catch (e) { gpuInfo = "محجوب"; }
+if (!gpuInfo) gpuInfo = "محجوب من النظام"; 
+// -----------------------------------------
+
 } catch (e) { gpuInfo = "محجوب من المتصفح"; }
 // -----------------------------------------
 
